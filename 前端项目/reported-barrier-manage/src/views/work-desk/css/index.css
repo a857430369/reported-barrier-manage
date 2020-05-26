@@ -1,0 +1,375 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+:root {
+  --common-margin: 15px;
+}
+.workDesk {
+  background-color: #fff;
+  background-size: 100%;
+  height: 100%;
+  width: 100%;
+  min-height: 600px;
+  overflow: auto;
+}
+ul {
+  list-style: none;
+}
+.workDesk-card {
+  height: 680px;
+  background-color: #eef3f7;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: var(--common-margin);
+  width: 97%;
+  overflow: auto;
+}
+.left-item-card {
+  width: calc(80% - var(--common-margin));
+  height: 100%;
+  float: left;
+  margin-right: var(--common-margin);
+}
+.small-card {
+  display: flex;
+  width: 100%;
+  height: 16%;
+}
+.small-card li {
+  cursor: pointer;
+  width: calc(25% - calc(var(--common-margin) * 3 / 4));
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  margin-right: var(--common-margin);
+}
+.small-card li:last-child {
+  margin-right: 0;
+}
+.small-card-light {
+  animation: light 2s linear infinite;
+}
+.small-card-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  animation: light 2s linear infinite;
+}
+@keyframes light {
+  0% {
+    box-shadow: 0 0 0 #fff inset;
+  }
+  50% {
+    box-shadow: 0 0 30px #fff inset;
+  }
+  100% {
+    box-shadow: 0 0 0 #fff inset;
+  }
+}
+.left-main-contain {
+  margin-top: var(--common-margin);
+  height: calc(42% - var(--common-margin));
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.left-main-contain > span:first-child {
+  margin-right: var(--common-margin);
+}
+.left-main-contain > span {
+  width: 50%;
+  height: 100%;
+  float: left;
+  background-color: greenyellow;
+}
+.small-card li p {
+  float: left;
+  position: relative;
+  background-color: var(--color);
+}
+.small-card li p:nth-child(1) {
+  width: 40%;
+  height: 100%;
+}
+.small-card li p:nth-child(1) img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.small-card li p:nth-child(2) {
+  width: 60%;
+  height: 100%;
+}
+.small-card li p:nth-child(2) span {
+  position: absolute;
+  right: 15%;
+  color: #fff;
+}
+.small-card li p:nth-child(2) span:nth-child(1) {
+  top: 15%;
+  font-size: 25px;
+}
+.small-card li p:nth-child(2) span:nth-child(2) {
+  bottom: 20%;
+  font-size: 16px;
+}
+.right-item-card {
+  width: 20%;
+  height: 100%;
+  float: left;
+}
+.sign-in {
+  width: 100%;
+  height: 30%;
+  margin-bottom: var(--common-margin);
+  background-color: skyblue;
+}
+.my-info {
+  width: 100%;
+  height: calc(70% - var(--common-margin));
+  background-color: tomato;
+}
+.table-card {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  border-top: 3px solid #30a3fe;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+.table-title {
+  width: 100%;
+  color: #1e9ef9;
+  padding: 5px 0px;
+  box-sizing: border-box;
+}
+.table-title i {
+  margin: 0 5px;
+}
+.table-title span:nth-child(2) {
+  font-weight: 550;
+  font-size: 16px;
+  font-family: 'Microsoft YaHei', '微软雅黑';
+  letter-spacing: 1px;
+}
+.table-title span:nth-child(3) {
+  font-style: italic;
+  color: #1e9ef9;
+  font-size: 13px;
+  vertical-align: bottom;
+}
+.table-title span:nth-child(4) {
+  margin: 3px 1px 0 0;
+  color: #555;
+  font-size: 13px;
+  vertical-align: bottom;
+  cursor: pointer;
+  float: right;
+}
+.table-title span:nth-child(4) img {
+  width: 65px;
+}
+.table-title span:nth-child(4) i {
+  margin: 0;
+}
+.table-title span:nth-child(4) i:nth-child(2) {
+  margin-left: -8px;
+}
+.table-contain {
+  height: calc(100% - 40.8px);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.table-contain-background {
+  background-color: #ebf6fc;
+  padding: 10px;
+  box-sizing: border-box;
+  background-position: right right;
+  background-size: cover;
+}
+.is-have-table-border {
+  border-top: 1px solid #EBEEF5;
+}
+.signIn-big-button {
+  width: var(--big-width);
+  height: var(--big-width);
+  border-radius: 50%;
+  background-color: #73d13d;
+  position: absolute;
+  text-align: center;
+  bottom: var(--big-position);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.signIn-big-button span {
+  line-height: var(--big-width);
+  color: #fff;
+}
+.signIn-big-button .signIn-small-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -54px;
+  padding: 5px 10px;
+  border-left: medium double #1e9ef9;
+  border-top: medium double #1e9ef9;
+  border-bottom: medium double #1e9ef9;
+  border-radius: 10px 0 0 10px;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 550;
+}
+.signIn-big-button::before {
+  content: "";
+  width: calc(var(--big-width) + var(--big-position));
+  height: calc(var(--big-width) + var(--big-position));
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+}
+.signin-state-but > span {
+  text-align: center;
+  display: inline-block;
+  width: calc(calc(50% - 4px) - 1px);
+  margin-bottom: 5px;
+}
+.signin-state-but > span:nth-child(odd) {
+  margin-right: 4px;
+}
+.workDesk .el-table td,
+.workDesk .el-table th {
+  padding: 2px 0;
+  padding-bottom: 0.1px;
+}
+.workDesk .el-table .cell {
+  color: #666;
+  font-weight: 400;
+  letter-spacing: 0;
+  font: 13px 'Microsoft YaHei', '微软雅黑';
+  padding: 7px 0;
+  padding-left: 2px;
+}
+.workDesk .workDesk-table-header .cell {
+  color: #555;
+  font: 13px/1.5 'Microsoft YaHei', '微软雅黑';
+  font-weight: 550;
+  background-color: #ebf6fc;
+}
+.workDesk .workDesk-table-header th:nth-child(1) .cell,
+.workDesk tbody tr td:nth-child(1) .cell {
+  padding-left: 5px;
+}
+.workDesk-common-function {
+  box-sizing: border-box;
+  padding: calc(var(--common-margin) * 3 / 2);
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.workDesk-common-function .wd-c-f-box {
+  height: calc(50% - calc(var(--common-margin)));
+  width: 100%;
+}
+.workDesk-common-function .wd-c-f-box .wd-c-f-item-box {
+  cursor: pointer;
+  width: calc((100% / 3) - 10px);
+  height: 100%;
+  display: inline-block;
+  border: 2px solid var(--workDesk-item-backColor);
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+}
+.workDesk-common-function .wd-c-f-box .wd-c-f-item-box .item-left-box {
+  width: 40%;
+  float: left;
+  height: 100%;
+  background-color: var(--workDesk-item-backColor);
+}
+.workDesk-common-function .wd-c-f-box .wd-c-f-item-box .item-left-box i {
+  color: var(--workDesk-common-icon);
+  line-height: 65.09px;
+  font-size: 30px;
+}
+.workDesk-common-function .wd-c-f-box .wd-c-f-item-box .item-right-box {
+  width: 60%;
+  float: left;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.workDesk-common-function .wd-c-f-box .wd-c-f-item-box .item-right-box span {
+  font-size: 16px;
+  font-weight: 550;
+  font-family: 'Microsoft YaHei', '微软雅黑';
+  letter-spacing: 1px;
+  color: #555;
+}
+.workDesk-common-function .wd-c-f-box .wd-c-f-item-box:nth-child(1),
+.workDesk-common-function .wd-c-f-box .wd-c-f-item-box:nth-child(2) {
+  margin-right: 15px;
+}
+.workDesk-common-function .wd-c-f-box:nth-child(1) {
+  margin-top: calc(var(--common-margin) / 2);
+  margin-bottom: var(--common-margin);
+}
+.workDesk-common-function .workDesk-common-pointer {
+  --common-pointer-distance: -1px;
+  transform: translateY(-50%);
+  top: 50%;
+}
+.workDesk-common-left-pointer {
+  left: var(--common-pointer-distance);
+}
+.workDesk-common-rigth-pointer {
+  right: var(--common-pointer-distance);
+}
+.workDesk-common-top-pointer {
+  top: var(--common-pointer-distance);
+}
+.workDesk-common-bottom-pointer {
+  bottom: var(--common-pointer-distance);
+}
+.workDesk-common-pointer {
+  position: absolute;
+}
+.workDesk-common-pointer i {
+  font-size: 20px;
+  color: #666;
+}
+.workDesk-common-pointer i:hover {
+  cursor: pointer;
+  color: blue;
+}
+.person-information {
+  padding: 10px 0;
+}
+.person-information .workDesk-common-pointer {
+  --common-pointer-distance: -2px;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.person-information > span {
+  display: block;
+  margin-left: var(--common-margin);
+  margin-top: 5px;
+  color: #666;
+  font-weight: 400;
+  letter-spacing: 1.2px;
+  font: 14px 'Microsoft YaHei', '微软雅黑';
+}
+.person-information > span span:nth-child(1) {
+  font-size: 15px;
+}

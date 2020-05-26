@@ -1,0 +1,16 @@
+http://localhost:8082/api/record/branchRecord
+
+     *  recordCode  工单id
+     *  expectDt   期望时间 2000-01-01 12:30:00
+     *  phone  手机号
+     *  disposeCode  点单人
+     *  explain   子单说明
+
+{
+"recordCode":1015,
+"phone":"123",
+
+"disposeCode":"123",
+"expectDt":"2000-01-01 12:30:00",
+"explain":"说明"	
+}

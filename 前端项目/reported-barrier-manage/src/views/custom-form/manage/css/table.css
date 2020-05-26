@@ -1,0 +1,39 @@
+.wrap-verify .el-dialog__header {
+  padding: 0;
+}
+.wrap-verify .el-dialog__body {
+  padding: 0px;
+  padding-top: 5px;
+}
+.d-d-form {
+  text-align: left;
+}
+.d-d-form .el-date-editor.el-input,
+.d-d-form .el-date-editor.el-input__inner {
+  width: 150px;
+}
+.d-d-form .el-form-item__label {
+  color: #989ca5;
+}
+.d-d-form .el-form-item {
+  width: 250px;
+  display: inline-block;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+.d-d-form .d-d-input {
+  display: inline-block;
+}
+.d-d-form .d-d-input .el-form-item {
+  width: 480px;
+  display: inline-block;
+}
+.d-d-form .d-d-input .el-date-editor.el-input__inner {
+  width: 400px;
+}
+.el-table .high-line-row {
+  background: #f3f6fb;
+}
+.el-table .high-line-head-row {
+  background: #f3f6fb;
+}

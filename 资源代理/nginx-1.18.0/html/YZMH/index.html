@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=favicon.ico><link href=static/css/chunk-01b91e4c.08289eba.css rel=prefetch><link href=static/css/chunk-20e96459.6153208d.css rel=prefetch><link href=static/css/chunk-2368f9c7.79b66499.css rel=prefetch><link href=static/css/chunk-305e3aba.e72ecf2c.css rel=prefetch><link href=static/css/chunk-383ac238.18ee9d67.css rel=prefetch><link href=static/css/chunk-43530b8c.b42f6a0a.css rel=prefetch><link href=static/css/chunk-4df34ca9.eb5298f8.css rel=prefetch><link href=static/css/chunk-4f13382b.9e1e8bec.css rel=prefetch><link href=static/css/chunk-772ab246.d3d1c891.css rel=prefetch><link href=static/css/chunk-b58b452c.c98a0e95.css rel=prefetch><link href=static/css/chunk-ea16d58e.cbb996a9.css rel=prefetch><link href=static/js/chunk-01b91e4c.09cad402.js rel=prefetch><link href=static/js/chunk-132402e3.06b81772.js rel=prefetch><link href=static/js/chunk-145575a2.ddf3636a.js rel=prefetch><link href=static/js/chunk-20e96459.7f61e537.js rel=prefetch><link href=static/js/chunk-2368f9c7.d8aaa34e.js rel=prefetch><link href=static/js/chunk-2d0aa9b6.66a4051f.js rel=prefetch><link href=static/js/chunk-305e3aba.53aa856f.js rel=prefetch><link href=static/js/chunk-383ac238.fd888777.js rel=prefetch><link href=static/js/chunk-43530b8c.ac4bc2a8.js rel=prefetch><link href=static/js/chunk-4df34ca9.f17fa2b0.js rel=prefetch><link href=static/js/chunk-4e6e485a.41df6d26.js rel=prefetch><link href=static/js/chunk-4f13382b.460d35f9.js rel=prefetch><link href=static/js/chunk-772ab246.6bd3fd12.js rel=prefetch><link href=static/js/chunk-b58b452c.3116e277.js rel=prefetch><link href=static/js/chunk-cf188d98.8bd1416a.js rel=prefetch><link href=static/js/chunk-ea16d58e.53bc0811.js rel=prefetch><link href=static/css/app.d5b38d47.css rel=preload as=style><link href=static/css/chunk-vendors.56b28f4e.css rel=preload as=style><link href=static/js/app.5572522e.js rel=preload as=script><link href=static/js/chunk-vendors.60d37402.js rel=preload as=script><link href=static/css/chunk-vendors.56b28f4e.css rel=stylesheet><link href=static/css/app.d5b38d47.css rel=stylesheet></head><body><div id=app></div><script src=static/js/chunk-vendors.60d37402.js></script><script src=static/js/app.5572522e.js></script></body><script src=http://cp.fsecity.com/xz/9e0f2d8926b/kefu/public/index/index/chatBoxJs/u/5c6cbcb7d55ca></script><script src=float/js/float-module.min.js></script><script>document.body.style.height =
+      document.documentElement.clientHeight - 100 + 'px'
+
+    var fm = new FloatModule({
+      animation: 'spring-in',
+      position: 'left-bottom',
+      btn_config: [
+        {
+          icon: 'fa fa-share-alt',
+        },
+        {
+          icon: 'fa fa-weibo',
+          title: '分享到微博',
+          click: fnTest,
+        },
+      ],
+    })
+
+    function fnTest() {
+      alert('hello world')
+    }
+
+    function fnClickStep() {
+      var index = event.currentTarget.getAttribute('index')
+      var steps = document.getElementsByClassName('step')
+      var contents = document.getElementsByClassName('step-content')
+      for (var i = 0; i < contents.length; i++) {
+        if (i == index) {
+          contents[i].style.display = 'block'
+          steps[i].classList.add('step-active')
+        } else {
+          contents[i].style.display = 'none'
+          steps[i].classList.remove('step-active')
+        }
+      }
+    }</script></html>

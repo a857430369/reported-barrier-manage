@@ -1,0 +1,16 @@
+.custom_style .el-table td,
+.custom_style .el-table th {
+  padding: 5px 0;
+}
+.custom_style .el-table th {
+  background-color: #f3f6fb;
+}
+
+.custom_style .filter .el-input__inner {
+  height: 36px;
+  line-height: 36px;
+}
+
+.custom_style .el-card__body {
+  padding: 15px;
+}

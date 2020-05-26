@@ -1,0 +1,51 @@
+{
+  "id": "1750983",
+  "name": "test",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "739114",
+      "name": "日历",
+      "font_class": "rili",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "7090038",
+      "name": "个人信息",
+      "font_class": "gerenxinxi",
+      "unicode": "e70d",
+      "unicode_decimal": 59149
+    },
+    {
+      "icon_id": "7127375",
+      "name": "打卡",
+      "font_class": "daqia",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "7646046",
+      "name": "资源 76",
+      "font_class": "ziyuan",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "8652825",
+      "name": "通知",
+      "font_class": "tongzhi",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "14146617",
+      "name": "功能",
+      "font_class": "gongneng",
+      "unicode": "e747",
+      "unicode_decimal": 59207
+    }
+  ]
+}
