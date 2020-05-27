@@ -1,6 +1,6 @@
 <template>
   <el-tooltip class="item" effect="light" :content="timeContent" placement="top">
-    <li class="el-timeline-item line-item-my">
+    <li class="el-timeline-item line-item-my" @click="getTimeItem">
       <span :style="'color:' + colorList[index % 4]">{{timestamp}}</span>
       <font class="point">
         <label v-if="reverse ? index != 0 : index != length - 1"></label>
@@ -28,6 +28,9 @@
     &:last-child {
       display: unset;
     }
+  }
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -98,6 +101,11 @@
       },
 
       icon: String
+    },
+    methods: {
+      getTimeItem() {
+        this.$emit('getTimeItem')
+      }
     }
   };
 </script>

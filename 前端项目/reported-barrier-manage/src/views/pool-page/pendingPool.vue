@@ -111,6 +111,7 @@
               show-overflow-tooltip
               header-align="center"
               align="center"
+              width="150px"
             >
             </el-table-column>
 
@@ -120,6 +121,7 @@
               show-overflow-tooltip
               header-align="center"
               align="center"
+              width="150px"
             >
             </el-table-column>
 
@@ -129,6 +131,7 @@
               show-overflow-tooltip
               header-align="center"
               align="center"
+              width="400px"
             >
             </el-table-column>
 
@@ -158,14 +161,14 @@
               </template>
             </el-table-column>
 
-            <el-table-column
+            <!-- <el-table-column
               prop="recordExplain"
               label="子单说明"
               show-overflow-tooltip
               header-align="center"
               align="center"
             >
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column
               prop="recordFlow"

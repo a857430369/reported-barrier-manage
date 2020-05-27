@@ -26,12 +26,12 @@
       <div class="bullshit">
         <div class="bullshit__oops">恢复中!</div>
         <div class="bullshit__headline">{{ message }}</div>
-        <div class="bullshit__info">
+        <!-- <div class="bullshit__info">
           请点击按钮回到首页...
         </div>
         <router-link :to="{ path: '/home' }">
           <a href="" class="bullshit__return-home">Back to home</a>
-        </router-link>
+        </router-link> -->
       </div>
     </div>
   </div>

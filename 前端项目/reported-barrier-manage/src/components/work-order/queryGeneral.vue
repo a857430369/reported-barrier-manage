@@ -72,17 +72,14 @@ export default {
     queryRecordFile,
   },
   props: {
-    formCode: {
-      type: Number,
-      default: '',
-    },
+    formCode: Number,
     isVerify: {
       type: String,
       default: '',
     },
     branchRecord: {
       type: String,
-      default: '',
+      default: 'N',
     },
     recordExplain: {
       type: String,
@@ -112,29 +109,6 @@ export default {
       returnVerifyReply: '',
     }
   },
-  methods: {
-    download(data) {
-      let base = ''
-      let fileNameItem = `${data.sourceFileName}.${data.contentType}`
-
-      if (this.$store.state.user.isTest) {
-        base = 'http://localhost:10001/file/download'
-      } else {
-        base = 'http://132.110.64.161:30001/currency_need/file/download'
-      }
-      const url = `url=${data.sourcePathName}`
-      const fileName = `fileName=${fileNameItem}`
-      const a = document.createElement('a')
-      a.href = base + '?' + fileName + '&' + url
-      a.click()
-    },
-    onCancel() {
-      this.$emit('onCancel')
-    },
-  },
-  mounted() {},
-  created() {},
-  watch: {},
 }
 </script>
 

@@ -22,6 +22,7 @@
         show-overflow-tooltip
         header-align="center"
         align="center"
+        width="150px"
       >
       </el-table-column>
 
@@ -31,6 +32,7 @@
         show-overflow-tooltip
         header-align="center"
         align="center"
+        width="150px"
       >
       </el-table-column>
 
@@ -40,6 +42,7 @@
         show-overflow-tooltip
         header-align="center"
         align="center"
+        width="400px"
       >
       </el-table-column>
 
@@ -55,7 +58,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column
+      <!-- <el-table-column
         prop="branchRecord"
         label="是否子单"
         show-overflow-tooltip
@@ -67,7 +70,7 @@
             {{ row.branchRecord | dataFormat(branchRecordOption) }}
           </el-tag>
         </template>
-      </el-table-column>
+      </el-table-column> -->
 
       <!-- <el-table-column
         prop="recordExplain"
@@ -494,11 +497,13 @@ export default {
     //打开对话框
     openDialog(recordCode, title, functionType, width = '50%') {
       if (functionType == 'F') {
+        this.clearBaseParams()
         this.remarkWidth = width
         this.baseParams.recordCode = recordCode
         this.remarkTitle = title
         this.remarkDialog = true
       } else if (functionType == 'R') {
+        this.clearApplyParams()
         this.confirmWidth = width
         this.applyParams.recordCode = recordCode
         this.confirmTitle = title
@@ -533,14 +538,12 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearBaseParams()
           this.getPersonalPage()
         })
         .catch((error) => {
           this.loading = false
         })
+      this.clearBaseParams()
     },
     //确认完成
     confirmCompletion() {
@@ -554,14 +557,12 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearapplyParams()
           this.getPersonalPage()
         })
         .catch((error) => {
           this.loading = false
         })
+      this.clearApplyParams()
     },
     //查看详情
     //清除基础对话框参数
@@ -572,7 +573,7 @@ export default {
       }
     },
     //清除确认完成对话框参数
-    clearapplyParams() {
+    clearApplyParams() {
       this.applyParams = {
         recordCode: '',
         recordScore: 0,

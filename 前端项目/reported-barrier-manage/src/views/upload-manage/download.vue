@@ -126,6 +126,7 @@
                     </el-table-column>
                     <el-table-column
                       label="文件名称"
+                      width="200px"
                       show-overflow-tooltip
                       prop="fileName">
 
@@ -147,6 +148,7 @@
                       v-if="getMenuCode === 'str'"
                       show-overflow-tooltip
                       label="分类"
+                      align="center"
                       prop="menuCode">
                       <template slot-scope="scope">
                         {{getMenuName(scope.row.menuCode)}}
@@ -155,10 +157,12 @@
                     <el-table-column
                       width="200px"
                       label="更新时间"
+                      align="center"
                       prop="lastDt">
                     </el-table-column>
                     <el-table-column
                       label="大小"
+                      align="center"
                       prop="fileSize">
                       <template slot-scope="scope">
                         {{scope.row.fileSize}}
@@ -426,22 +430,12 @@ export default {
     document_loaded() {
       // GotoMainStep(0);
       var WH = document.body.clientHeight;
-      console.log(WH)
-      // document.getElementById("treeStyle").style.height = WH + "px";
-      // var WW = document.body.scrollWidth * 3 / 4;
       console.log(document.getElementById("getTreeHeight"))
       document.getElementById("getTreeHeight").style.height = WH-10  + "px";
-      // document.getElementById("getTreeHeight").style.height = WH  + "px";
       var WW = document.body.scrollWidth * 3 / 4;
       console.log(WH)
       document.getElementById("aisdeTree").style.height = WH + "px";
       document.getElementById("aisdeTree").style.width = 280 + "px";
-      // aisdeTree
-      //js预加载
-      //setTimeout(function () {
-      //    if(window.parent && window.parent.YZLoader && window.parent.YZLoader.cache)
-      //        window.parent.YZLoader.cache();
-      //}, 50);
     },
     // 打开添加目录对话框
     addMenu() {
@@ -460,11 +454,11 @@ export default {
     },
     // 表头样式
     headClass () {
-      return 'text-align: center;background:#eef1f6;'
+      return 'background:#eef1f6;'
     },
     // 表格样式设置
     rowClass () {
-      return 'text-align: center; font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;color: #989ca5;font-weight: 700;'
+      return 'font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;color: #989ca5;font-weight: 700;'
     },
     // 插槽按钮调用前事件
     beforeHandleButton() {

@@ -3,18 +3,20 @@
     <el-table  border :data="tableData" style=" margin: -10px auto;" v-loading='loading'>
       <el-table-column label="序号" type="index" align="center" width='50px'>
       </el-table-column>
-      <el-table-column label="公告标题" show-overflow-tooltip prop="noticeName" align="center" width='450px'>
+      <el-table-column label="公告标题" show-overflow-tooltip prop="noticeName"  width='450px'>
         <template slot-scope="scope">
-          <el-popover
+          <!-- <el-popover
           placement="bottom"
            title="标题"
            width="300"
            trigger="hover"
            v-if="scope.row.noticeName"
            :content="scope.row.noticeName">
-            <span slot="reference"><el-button type="text" size="small" @click="changeDio(scope.$index, scope.row)" >{{scope.row.noticeName}}</el-button></span>
-          </el-popover>
-          <span v-else><el-button type="text" size="small" @click="changeDio(scope.$index, scope.row)" >{{scope.row.noticeName}}</el-button></span>
+            <span slot="reference"> -->
+              <el-button type="text" size="small" @click="changeDio(scope.$index, scope.row)" >{{scope.row.noticeName}}</el-button>
+              <!-- </span>
+          </el-popover> -->
+          <!-- <span v-else><el-button type="text" size="small" @click="changeDio(scope.$index, scope.row)" >{{scope.row.noticeName}}</el-button></span> -->
         </template>
         <!-- <template slot-scope="scope">
         <el-button type="text" size="small" @click="changeDio(scope.$index, scope.row)" >{{scope.row.noticeName}}</el-button>

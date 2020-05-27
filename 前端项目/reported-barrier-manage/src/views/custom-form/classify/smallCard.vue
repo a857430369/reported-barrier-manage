@@ -3,7 +3,6 @@
     <div>
     <p>{{ dataObj.classifyName }}</p>
     <p>{{ dataObj.classifyRemark }}</p>
-    {{ test(smallClassifyList) }}
     <div style="overflow: auto">
     <ul class="card-tip" id="" v-if="isShowSmallClassify">
       <li :class="index == 0 ? 'on' : ''" v-for="(item,index) in smallClassifyList"
@@ -136,9 +135,6 @@ export default {
     },
   },
   methods: {
-    test(data) {
-      console.log('data', data)
-    },
     writeModel(data) {
       let writeStore = require('../write-form/store/index')
       let param = {

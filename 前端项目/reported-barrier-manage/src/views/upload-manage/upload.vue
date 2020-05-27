@@ -54,7 +54,7 @@
             
           </el-scrollbar>
           <div class="addButton">
-            <el-button type="primary" style="width:100%" @click="addMenu"><i class="el-icon-circle-plus-outline"></i><span/>添加目录</el-button>
+            <el-button type="primary" style="width:100%" @click="addMenu"><i class="el-icon-circle-plus-outline"></i><span/>添加分类</el-button>
           </div>
         </div>
       </el-card>
@@ -127,6 +127,7 @@
                   </el-table-column>
                   <el-table-column
                     label="文件名称"
+                    width="200px"
                     show-overflow-tooltip>
                     <template slot-scope="scope">
                       
@@ -145,6 +146,7 @@
                   <el-table-column
                     v-if="getMenuCode === 'str'"
                     show-overflow-tooltip
+                    align="center"
                     label="分类"
                     prop="menuCode">
                     <template slot-scope="scope">
@@ -153,11 +155,13 @@
                   </el-table-column>
                   <el-table-column
                     width="200px"
+                    align="center"
                     label="更新时间"
                     prop="lastDt">
                   </el-table-column>
                   <el-table-column
                     label="大小"
+                    align="center"
                     prop="fileSize">
                     <template slot-scope="scope">
                       {{scope.row.fileSize}}
@@ -445,7 +449,6 @@ export default {
           let that = this
           setTimeout(function () {
             // 打印screenWidth变化的值
-            console.log(that.screenHeight)
             that.timer = false
           }, 400)
         }
@@ -538,12 +541,10 @@ export default {
     },
     //控制浏览器显示的高宽
     document_loaded() {
-      // GotoMainStep(0);
       var WH = document.body.clientHeight;
       document.getElementById("getTreeHeight").style.height = WH-10  + "px";
-      // document.getElementById("getTreeHeight").style.height = WH  + "px";
       var WW = document.body.scrollWidth * 3 / 4;
-      console.log(WH)
+
       document.getElementById("aisdeTree").style.height = WH + "px";
       document.getElementById("aisdeTree").style.width = 280 + "px";
     },
@@ -579,11 +580,11 @@ export default {
     },
     // 表头样式
     headClass () {
-      return 'text-align: center;background:#eef1f6;'
+      return 'background:#eef1f6;'
     },
     // 表格样式设置
     rowClass () {
-      return 'text-align: center; font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;color: #989ca5;font-weight: 700;'
+      return 'font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;color: #989ca5;font-weight: 700;'
     },
     // 插槽按钮调用前事件
     beforeHandleButton() {

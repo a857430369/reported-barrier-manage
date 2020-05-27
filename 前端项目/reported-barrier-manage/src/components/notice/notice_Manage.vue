@@ -88,7 +88,6 @@
         label="通告标题"
         show-overflow-tooltip
         prop="noticeName"
-        align="center"
         width="450px"
       >
       <template slot-scope="scope">

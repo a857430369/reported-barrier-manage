@@ -22,6 +22,7 @@
         show-overflow-tooltip
         header-align="center"
         align="center"
+        width="150px"
       >
       </el-table-column>
 
@@ -31,6 +32,7 @@
         show-overflow-tooltip
         header-align="center"
         align="center"
+        width="150px"
       >
       </el-table-column>
 
@@ -40,6 +42,7 @@
         show-overflow-tooltip
         header-align="center"
         align="center"
+        width="400px"
       >
       </el-table-column>
 
@@ -149,10 +152,13 @@
         header-align="center"
         align="center"
       >
-        <template slot-scope="scope">
-          <p v-if="scope.row.orderTime >= 0">
-            {{ time(scope.row.orderTime) }}
-            <!-- {{ parseTime(scope.row.orderTime, '{i}:{s}') }} -->
+        <!-- receiptSource -->
+        <template slot-scope="{ row }">
+          <p v-if="row.receiptSource == 'D' || row.receiptSource == 'F'">
+            无限制
+          </p>
+          <p v-else-if="row.orderTime >= 0">
+            {{ time(row.orderTime) }}
           </p>
           <p v-else>已超时</p>
         </template>
@@ -168,10 +174,9 @@
         header-align="center"
         align="center"
       >
-        <template slot-scope="scope">
-          <p v-if="scope.row.handleTime >= 0">
-            {{ time(scope.row.handleTime) }}
-            <!-- {{parseTime(scope.row.handleTime,'{y}-{m}-{d} {h}:{i}:{s}')}} -->
+        <template slot-scope="row">
+          <p v-if="row.handleTime >= 0">
+            {{ time(row.handleTime) }}
           </p>
           <p v-else>已超时</p>
         </template>
@@ -322,7 +327,11 @@
         <el-button
           type="primary"
           @click="openDialog(detailsParams, '子单', 'B')"
-          v-if="recordFlow == 'C,Z,H' && detailsParams.recordFlow == 'C'"
+          v-if="
+            recordFlow == 'C,Z,H' &&
+              detailsParams.recordFlow == 'C' &&
+              detailsParams.branchRecord != 'S'
+          "
           >子 单</el-button
         >
         <el-button
@@ -394,7 +403,7 @@
             <template slot="append">小时</template>
           </el-input>
         </el-form-item>
-        <el-form-item label="原因" prop="remark">
+        <el-form-item label="处理结果" prop="remark">
           <el-input
             type="textarea"
             maxlength="255"
@@ -748,7 +757,7 @@ export default {
   },
   data() {
     const onePoint = (rule, value, callback) => {
-      if (!/^[0-9]+([.]{1}[0-9]{1})?$/.test(value)) {
+      if (!/^([[0-9]|[1-9][0-9]+)([.]{1}[0-9]{1})?$/.test(value)) {
         callback(new Error('只保留一位小数'))
       } else {
         callback()
@@ -923,23 +932,29 @@ export default {
       this.width = width
       this.functionType = functionType
       if (functionType == 'J' || functionType == 'H' || functionType == 'T') {
+        this.clearBaseParams()
         this.baseParams.recordCode = data.recordCode
         this.remarkDialog = true
       } else if (functionType == 'W') {
+        this.clearFinishedParams()
         this.clearFileParams()
         this.finishedParams.recordCode = data.recordCode
         this.finishedDialog = true
       } else if (functionType == 'P') {
+        this.clearConfirmParams()
         this.confirmParams.recordCode = data.recordCode
         this.confirmDialog = true
       } else if (functionType == 'S') {
+        this.clearTransferProvinceParams()
         this.transferProvinceParams.recordCode = data.recordCode
         this.transferProvinceDialog = true
       } else if (functionType == 'Z') {
+        this.clearTransferRecordParams()
         this.transferRecordParams.recordCode = data.recordCode
         this.userParams.recordClassifySmall = data.recordClassifySmall
         this.transferRecordDialog = true
       } else if (functionType == 'B') {
+        this.clearBranchRecordParams()
         this.clearFileParams()
         this.branchRecordParams.recordCode = data.recordCode
         this.branchRecordParams.phone = data.createPhone
@@ -1053,8 +1068,6 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
           this.findWorkOrderList()
         })
         .catch((error) => {
@@ -1073,14 +1086,12 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearBaseParams()
           this.findWorkOrderList()
         })
         .catch((error) => {
           this.loading = false
         })
+      this.clearBaseParams()
     },
     //处理完成
     finishedProcessing() {
@@ -1102,14 +1113,13 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearFinishedParams()
           this.findWorkOrderList()
         })
         .catch((error) => {
           this.loading = false
         })
+
+      this.clearFinishedParams()
     },
     //暂缓订单
     deferRecord() {
@@ -1123,14 +1133,12 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearBaseParams()
           this.findWorkOrderList()
         })
         .catch((error) => {
           this.loading = false
         })
+      this.clearBaseParams()
     },
     //恢复订单
     recoverRecord(val) {
@@ -1146,8 +1154,6 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
           this.findWorkOrderList()
         })
         .catch((error) => {
@@ -1166,14 +1172,12 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearConfirmParams()
           this.findWorkOrderList()
         })
         .catch((error) => {
           this.loading = false
         })
+      this.clearConfirmParams()
     },
     //退单
     retreatRecord() {
@@ -1187,14 +1191,12 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearBaseParams()
           this.findWorkOrderList()
         })
         .catch((error) => {
           this.loading = false
         })
+      this.clearBaseParams()
     },
     //转省处理
     transferProvince() {
@@ -1208,14 +1210,12 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearTransferProvinceParams()
           this.findWorkOrderList()
         })
         .catch((error) => {
           this.loading = false
         })
+      this.clearTransferProvinceParams()
     },
     //转单
     transferRecord() {
@@ -1232,14 +1232,12 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearTransferRecordParams()
           this.findWorkOrderList()
         })
         .catch((error) => {
           this.loading = false
         })
+      this.clearTransferRecordParams()
     },
     //子单
     branchRecord() {
@@ -1264,14 +1262,12 @@ export default {
             type: 'success',
           })
           this.loading = false
-        })
-        .then(() => {
-          this.clearBranchRecordParams()
           this.findWorkOrderList()
         })
         .catch((error) => {
           this.loading = false
         })
+      this.clearBranchRecordParams()
     },
 
     //参数清理

@@ -8,9 +8,13 @@
         >
           {{ item.meta.title }}
         </span>
-        <span v-else>
+        <span v-else @click.prevent="handleLink(item)">
+          <span
+            class="el-icon-menu"
+            style="margin-right:5px;color: #409EFF;"
+          ></span>
           <!-- <span style="color: #97a8be;cursor: text;">当前页面位置: </span> -->
-          <a @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+          <a style="cursor:pointer;">{{ item.meta.title }}</a>
         </span>
       </el-breadcrumb-item>
     </transition-group>

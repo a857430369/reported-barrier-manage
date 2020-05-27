@@ -23,6 +23,10 @@
       </div>
     </el-dialog>
 
+    <el-dialog title="短信提示" :visible.sync="isWorkOrders" width="80%" top="5vh">
+      <workOrderList :formCode="recordCode"/>
+    </el-dialog>
+
     <audio
       src="./mp3/ding.mp3"
       id="music"
@@ -32,7 +36,7 @@
     <div class="workDesk-card">
       <div class="left-item-card">
         <ul class="small-card">
-          <li @click="getRouter('/employeesList')">
+          <li @click="getRouter('/employeesList', 'router')">
             <p style="--color: #fe9900">
               <img src="./img/icon/icon1.png" />
             </p>
@@ -41,13 +45,13 @@
               <span>待处理</span>
             </p>
           </li>
-          <li @click="getRouter('/pendingPool')">
+          <li @click="getRouter('/pendingPool', 'router')">
             <p style="--color: #915fff">
               <img src="./img/icon/icon2.png" />
             </p>
             <p style="--color: #7259ff">
               <span>{{ numObj.dispatchingNum }}</span>
-              <span>工单未转派数</span>
+              <span>工单池</span>
             </p>
           </li>
 
@@ -56,8 +60,8 @@
               <img src="./img/icon/icon3.png" />
             </p>
             <p style="--color: #3caaff">
-              <span>{{ numObj.itsmNum }}</span>
-              <span>ITSM工单</span>
+              <span></span>
+              <span>电话留言</span>
             </p>
           </li>
           <li
@@ -82,7 +86,7 @@
                 <span>通知公告</span>
                 <span>--Annoucement</span>
 
-                <span @click="getRouter('/noticeSee')"
+                <span @click="getRouter('/noticeSee', 'router')"
                   ><img src="./img/more.gif" style="width: 57px;"
                 /></span>
               </div>
@@ -221,7 +225,7 @@
                 <i class="iconfont icon-ziyuan" style="font-size: 14px"></i>
                 <span>知识库</span>
                 <span>--Knowledge</span>
-                <span @click="getRouter('/knowlegdeUser')"
+                <span @click="getRouter('/knowlegdeUser', 'router')"
                   ><img src="./img/more.gif" style="width: 57px;"
                 /></span>
               </div>
@@ -270,13 +274,11 @@
                 class="table-contain custom-date-picker"
                 style="width: 100%;"
               >
-                <!-- <div class="table-contain custom-date-picker"> -->
                 <custom-date
                   style="display: block-inline"
                   v-model="historyTime"
                 ></custom-date>
 
-                <!-- <div style="width: 100%;height: 100%;display:inline-block"> -->
                 <custom-time-line
                   v-if="activities.length > 0"
                   :reverse="false"
@@ -290,13 +292,13 @@
                     :length="activities.length"
                     :timestamp="getSmallTime(activity.createDt)"
                     :timeContent="activity.recordName"
+                    @getTimeItem="getOrderInfo(activity)"
                   >
                   </custom-time-line-item>
                 </custom-time-line>
                 <ul v-else>
                   <span id="historyIsNoData">暂无数据</span>
                 </ul>
-                <!-- </div> -->
               </div>
             </div>
             <!-- 组件 -->
@@ -420,17 +422,23 @@
 import axios from 'axios'
 import { downloadFile } from '@/utils/common'
 import { getDayStartEnd, debounce } from './js/index'
+import workOrderList from '@/components/work-order/queryGeneral'
 import customDate from '@/components/date-picker/index'
 import customTimeLine from '@/components/cumstom-timeline/timeline/index'
 import customTimeLineItem from '@/components/cumstom-timeline/timeline-item/index'
 
 export default {
   components: {
+    workOrderList,
     customDate,
     customTimeLine,
     customTimeLineItem,
   },
   methods: {
+    getOrderInfo(data) {
+      this.isWorkOrders = true
+      this.recordCode = data.recordCode
+    },
     getKfManageData() {
       if (!this.$store.state.user.isTest) {
         let token = this.$storage.getSession('token')
@@ -524,7 +532,13 @@ export default {
       }
     },
     getRouter(routeName, jumpType) {
-      if (jumpType == 'router') {
+      if (jumpType == 'dialog') {
+        if (this.kfDialogUrl) {
+          window.open(this.kfDialogUrl, '_blank')
+        } else {
+          this.$message.error('客服管理出现错误!')
+        }
+      } else {
         if (routeName) {
           this.$router.push({
             path: '/workDesk' + routeName,
@@ -532,10 +546,6 @@ export default {
               type: 'workDesk',
             },
           })
-        }
-      } else {
-        if (this.kfDialogUrl) {
-          window.open(this.kfDialogUrl, '_blank')
         }
       }
     },
@@ -1214,6 +1224,9 @@ export default {
       let param = {
         userCode: this.$store.state.user.operCode,
       }
+      // let param = {
+      //   token = this.$storage.getSession('token')
+      // }
 
       this.$api.kfRemote.setDownKFData(param).then((res) => {
         // 客服下线
@@ -1310,7 +1323,9 @@ export default {
   },
   data() {
     return {
+      recordCode: null,
       isShowNotions: false,
+      isWorkOrders: false,
       numObj: {
         handlingNum: 0,
         dispatchingNum: 0,
@@ -1523,5 +1538,9 @@ export default {
 }
 .workDesk .el-dialog__body {
   padding: 22px 20px;
+}
+
+.workDesk-card .el-table__row:hover {
+  cursor: pointer;
 }
 </style>

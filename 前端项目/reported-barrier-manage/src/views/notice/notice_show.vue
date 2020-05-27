@@ -1,10 +1,10 @@
 <template>
-  <div class="custom_style">
+  <div class="custom_style" style='margin: 20px auto;'>
     <el-row type="flex" justify="center" align="middle" class="row-style">
       <el-tabs
         type="border-card"
         v-model="currTabPane"
-        style="width: 99%; margin: 20px auto;"
+        style="width: 99%; margin: 0px auto;"
         class="filter"
         @tab-click="handleSelect"
       >

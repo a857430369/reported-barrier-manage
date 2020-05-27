@@ -1,16 +1,16 @@
 <template>
   <div class="hexin">
-    <h2 class="header"><span>{{noticeContent.noticeName}}</span></h2>
-    <h3 class="header_fuzhu"><span>发布时间:{{noticeContent.createDt}}</span></h3>
+    <h1 class="header"><span>{{noticeContent.noticeName}}</span></h1>
+    <h3 class="header_fuzhu"><span>{{notice.createDt}}</span><el-divider direction="vertical"></el-divider><span>{{notice.userName}}</span></h3>
     <el-divider></el-divider>
-    <div  v-html="noticeContent.noticeContent" class="content">{{noticeContent.noticeContent}}</div>
+    <h4  v-html="noticeContent.noticeContent" class="content"></h4>
     <div v-if="flag(noticeContent.noticeCode)">
       <div>
 
       </div>
       <div style="text-align: left">
         <div v-for="(item, index) in noticeContent.file" :key="index">
-          <span>附件：<el-button type="text" @click="downloadContentFile(item)">{{item.fileName}}</el-button></span>
+          <span style="font-size: 20px">附件：<el-button type="text" @click="downloadContentFile(item)">{{item.fileName}}</el-button></span>
           
         </div>
       </div>
@@ -28,12 +28,17 @@ export default {
 
   data() {
     return {
-      noticeContent: objDeepCopy(this.content),
-      flagContent: false
+      flagContent: false,
+      noticeContent: objDeepCopy(this.notice)
     }
   },
 
-  props:['content'],
+  props:{
+    notice: {
+      type: Object,
+      default: () => ({})
+    }
+  }, 
 
   methods: {
     flag(code) {
@@ -77,13 +82,9 @@ export default {
 
 <style scoped>
 .hexin{
+  height: 100%;
+  overflow: scroll;
   text-align: center;
-}
-.header{
-  font-size: 40px
-}
-.header_fuzhu{
-  font-size: 20px
 }
 .content{
   text-align: left;

@@ -190,6 +190,7 @@
               show-overflow-tooltip
               header-align="center"
               align="center"
+              width="150px"
             >
             </el-table-column>
 
@@ -199,6 +200,7 @@
               show-overflow-tooltip
               header-align="center"
               align="center"
+              width="150px"
             >
             </el-table-column>
 
@@ -208,6 +210,7 @@
               show-overflow-tooltip
               header-align="center"
               align="center"
+              width="400px"
             >
             </el-table-column>
 

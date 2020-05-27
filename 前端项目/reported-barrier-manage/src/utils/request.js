@@ -11,12 +11,12 @@ const service = axios.create({
 })
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
-// request interceptor 98EBFB5DBAAC770EE053470D7C841992  98EAEF948B52F1EAE053470D7C843E12
+// request interceptor 98EBFB5DBAAC770EE053470D7C841992  98EAEF948B52F1EAE053470D7C843E12  A5203B72F5F628EFE053470D7C848665
 service.interceptors.request.use(
   config => {
     //config.headers['userCode'] = isTest ? '98EBFB5DBAAC770EE053470D7C841992' : storage.getSession('account').operCode
     if (isTest) {
-      config.headers['userCode'] = '98EBFB5DBAAC770EE053470D7C841992'
+      config.headers['userCode'] = 'A5203B72F5F628EFE053470D7C848665'
     } else {
       const token = storage.getSession('token')
       const accout = storage.getSession('account')
@@ -50,11 +50,7 @@ service.interceptors.response.use(
       });
       return Promise.reject(new Error(res.err_msg || 'Error'));
     } else if (res.code && res.code == 10001) {
-      Message({
-        message: res.err_msg || '登录失败!',
-        type: 'error',
-        duration: 3 * 1000
-      });
+      console.error(res.err_msg)
       return Promise.reject(new Error(res.err_msg || 'Error'));
     } else {
       if (res.code && res.code !== 0 && res.code !== 1) {

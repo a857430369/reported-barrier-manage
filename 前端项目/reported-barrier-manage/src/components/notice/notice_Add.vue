@@ -210,13 +210,14 @@
           </el-upload>
         </el-form-item>
       </el-row>
-    </el-form>
+    
     <center>
       <div class="demo-drawer__footer">
         <el-button @click="Nsave()">保存</el-button>
         <el-button type="primary" @click="submitForm()">发布</el-button>
       </div>
     </center>
+    </el-form>
   </div>
 </template>
 <script>
