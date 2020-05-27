@@ -9,22 +9,22 @@
         @tab-click="handleSelect"
       >
         <el-tab-pane key="1">
-          <span slot="label"
-            ><i class="el-icon-edit-outline"></i> 公告管理</span
-          >
-          <manage ref='chlid'></manage
-        ></el-tab-pane>
-        <el-tab-pane key="2">
-          <span slot="label"
-            ><i class="el-icon-document-copy"></i> 公告记录</span
-          >
-          <record  ref='children'></record
-        ></el-tab-pane>
-        <el-tab-pane key="3">
           <span slot="label" style='color:#00BB00	'
             ><i class="el-icon-circle-plus-outline" ></i> 新增公告</span
           >
           <add ref="add"></add
+        ></el-tab-pane>
+        <el-tab-pane key="2">
+          <span slot="label"
+            ><i class="el-icon-document-copy"></i> 公告管理</span
+          >
+          <record  ref='children'></record
+        ></el-tab-pane>
+        <el-tab-pane key="3">
+          <span slot="label"
+            ><i class="el-icon-edit-outline"></i> 草稿箱</span
+          >
+          <manage ref='chlid'></manage
         ></el-tab-pane>
       </el-tabs>
     </el-row>
@@ -58,9 +58,9 @@ export default {
   methods: {
     //导航栏事件
     handleSelect(key, keyPath) {
-      if(this.currTabPane=='0'){
+      if(this.currTabPane=='1'){
         this.$refs.chlid.findAll();
-      }else if(this.currTabPane=='1'){
+      }else if(this.currTabPane=='2'){
         this.$refs.children.findRecordAll();
       }
     },

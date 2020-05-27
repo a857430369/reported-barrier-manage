@@ -109,7 +109,7 @@
               </div>
               <div class="norRect" style="height:700px;border-radius: 4px;border: 1px solid #EBEEF5;" v-if='notcieDet'>
                 <div class="norTit norTitBg" >
-                    <span>文章详情</span>
+                    <span>{{this.Name}}文章详情</span>
                 </div>
                 <el-card  shadow="never" style="height:659px;overflow:auto;border: 0px;">
                     <el-table border :data="essay" style="margin: 0px auto;">
@@ -124,11 +124,12 @@
                       </el-table-column>
                       <el-table-column label="操作" fixed="right" align="center" width="300">
                         <template slot-scope="scope">
-                          <!-- <el-button
+                          <el-button
                             size="mini"
-                            icon="el-icon-delete"
+                            type='primary'
+                            icon="el-icon-edit"
                             @click="handleEdit(scope.$index, scope.row)"
-                            >编辑</el-button> -->
+                            >编辑</el-button>
                           <el-button
                             size="mini"
                             type="danger"
@@ -155,14 +156,14 @@
         </template>
         <typeadd v-bind:dataForm='Message' @Close='Close' ref='dataForm'></typeadd></el-dialog>
         <!-- 编辑对话框模块 -->
-        <el-dialog width="75%" 
+        <!-- <el-dialog width="75%" 
         :visible.sync="dialogEdit"
         :before-close="modalCloseEdit"
         :close-on-click-modal="false">
         <template slot="title"> 
         <el-row style="margin:0px auto;text-align: center"><h2>文章编辑</h2></el-row> 
         </template>
-        <knowEdit v-bind:form='knowMessage' ></knowEdit></el-dialog>
+        <knowEdit v-bind:message='knowMessage' @getAll='CloseDet'></knowEdit></el-dialog> -->
     </div>
     
 </template>
@@ -173,6 +174,7 @@ import knowEdit from '../../components/knowledge/knowEdit'
 export default {
   data() {
     return {
+        Name:'',
         data:[],
         form:{},
         TypeList:[],
@@ -191,8 +193,8 @@ export default {
         dialogDet:false,
         flag:0,
         knowMessage:[],
-        typeNew:false
-
+        typeNew:false,
+        test:[],
     }
   },
   created(){
@@ -205,10 +207,10 @@ export default {
   },
   methods: {
       //分页换页刷新
-      refreshPageRequest: function (pageNum) {
-        this.pageRequest.pageNum = pageNum
-        this.findWord()
-      },
+      // refreshPageRequest: function (pageNum) {
+      //   this.pageRequest.pageNum = pageNum
+      //   this.findWord()
+      // },
       //关闭对话框
       modalClose(done) {
         this.$confirm('确认关闭？')
@@ -234,10 +236,21 @@ export default {
         // this.typeNew=false
       },
       //
+      CloseDet(){
+        this.dialogEdit=false
+        this.findWord(this.test)
+      },
+      //
       handleEdit(id,val){
         this.knowMessage=val
         // this.knowMessage.orgCode=
-        this.dialogEdit=true
+        // this.dialogEdit=true
+        this.$router.push({
+          path: '/knowlegdeEdit',
+          query: {
+            message: this.knowMessage.noticeCode
+          }
+        })
       },
       //文章删除
       handleDelet(id,val){
@@ -248,7 +261,7 @@ export default {
           this.editLoading = false
           if (res.code == 0) {
             this.$message({ message: '删除成功', type: 'success' })
-            this.findWord(this.form)
+            this.findWord(val)
           } else {
             this.$message({ message: '删除失败', type: 'error' })
           }
@@ -316,6 +329,8 @@ export default {
       findWord(val){
         // this.tpyeDet=false
         // this.notcieDet=true
+        this.test=val
+        this.Name=val.knowledgeName
         this.flag=1
         let dev = { condition: {knowledgeCode:val.knowledgeCode,noticeStatus:'S'}, rule: {}, page: {} }
         dev.page = {

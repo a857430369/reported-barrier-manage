@@ -5,6 +5,10 @@ function load(component) {
 
 //路由数组
 const routes = [
+  {
+    path: '/knowlegdeEdit',
+    component: () => import('@/views/knowledge/knowEdit')
+  },
 ];
 
 export default routes;

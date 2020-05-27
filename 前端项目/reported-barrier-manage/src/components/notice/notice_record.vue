@@ -156,7 +156,7 @@
               icon="el-icon-share"
               @click="handleDet(scope.$index, scope.row)"
               >阅读详情</el-button>
-              <el-button 
+              <el-button v-if="scope.row.noticeType!='M'"
               size="mini"
               type="danger"
               icon="el-icon-delete"

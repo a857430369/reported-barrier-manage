@@ -140,12 +140,13 @@
           </el-upload>
         </el-form-item>
       </el-row>
-    </el-form>
-    <center>
+      <center>
       <div class="demo-drawer__footer">
         <el-button type="primary" @click="submitForm()">发布</el-button>
       </div>
     </center>
+    </el-form>
+    
   </div>
 </template>
 <script>
@@ -233,6 +234,7 @@ export default {
         noticeType: 'K',
         noticeUrgent: 'P',
         noticeContent: '',
+        orgCode:'',
       },
       way: false, //指点按钮显示
       fileAll: [], //所有文件数组
@@ -378,7 +380,7 @@ export default {
             case 'file':
             default:
           }
-          let Allurl = 'http://localhost:8010/'
+          let Allurl = 'http://132.110.64.161:30001/kftd/yzmh/uploadFile'
           if (meta.filetype == 'image') {
             let input = document.createElement('input') //创建一个隐藏的input
             input.setAttribute('accept', filetype)
@@ -752,7 +754,13 @@ export default {
                 this.editLoading = true
                 if (this.form.noticeAppoint == 'A') {
                   this.assign = []
+                  this.form.orgCode=''
                 }
+                const activeEditor = tinymce.activeEditor
+                const editBody = activeEditor.getBody()
+                activeEditor.selection.select(editBody)
+                var textContent = activeEditor.selection.getContent({ format: 'text' })
+                this.form.noticeText=textContent//获取纯文本
                 this.form.noticeStatus = 'S'
                 let dev = { notice: {}, data:this.form.orgCode }
                 dev.notice = Object.assign({}, this.form)

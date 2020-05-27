@@ -441,7 +441,7 @@ export default {
             case 'file':
             default:
           }
-          let Allurl = 'http://localhost:8010/'
+          let Allurl = 'http://132.110.64.161:30001/kftd/yzmh/uploadFile'
           if (meta.filetype == 'image') {
             let input = document.createElement('input') //创建一个隐藏的input
             input.setAttribute('accept', filetype)

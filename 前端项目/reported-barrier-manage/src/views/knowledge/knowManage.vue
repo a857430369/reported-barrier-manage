@@ -9,6 +9,10 @@
         @tab-click="handleSelect"
       >
         <el-tab-pane key="1">
+          <span slot="label" style='color:#00BB00	'
+            ><i class="el-icon-circle-plus-outline"></i> 新增知识库文章</span>
+          <Add ref="child"></Add></el-tab-pane>
+        <el-tab-pane key="3">
           <span slot="label"
             ><i class="el-icon-edit-outline"></i> 知识库分类管理</span
           >
@@ -18,10 +22,7 @@
             ><i class="el-icon-document-copy"></i> 知识库分类排序</span>
           <record></record
         ></el-tab-pane> -->
-        <el-tab-pane key="3">
-          <span slot="label" style='color:#00BB00	'
-            ><i class="el-icon-circle-plus-outline"></i> 新增知识库文章</span>
-          <Add ref="child"></Add></el-tab-pane>
+        
       </el-tabs>
     </el-row>
   </div>
@@ -52,7 +53,7 @@ export default {
   methods: {
     //导航栏事件
     handleSelect(key, keyPath) {
-      if(this.currTabPane=='1'){
+      if(this.currTabPane=='0'){
         this.$refs.child.findDown();
       }
     },

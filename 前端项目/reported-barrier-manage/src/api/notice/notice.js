@@ -136,6 +136,18 @@ export function editInfo(params) {
   })
 }
 /**
+ * 修改通知
+ */
+export function editInfoNotice(params) {
+  return request({
+    url: '/notice/editInfoNotice?orgCode=' + params.orgCode,
+    headers: jsonHeaders,
+    timeout: 60 * 1000,
+    method: 'post',
+    data: params.notice
+  })
+}
+/**
 * 删除通知
 */
 export function delInfo(params) {
