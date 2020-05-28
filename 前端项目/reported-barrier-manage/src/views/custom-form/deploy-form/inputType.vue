@@ -62,6 +62,7 @@
                         required
                         prop="date">
             <el-select v-model="form.date"
+                        :disabled="isRequired"
                        placeholder="请选择活动区域">
               <el-option label="年/月/日"
                          value="ymd"></el-option>

@@ -23,8 +23,14 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="短信提示" :visible.sync="isWorkOrders" width="80%" top="5vh">
-      <workOrderList :formCode="recordCode"/>
+    <el-dialog
+      title="工单详情"
+      :visible.sync="isWorkOrders"
+      width="80%"
+      top="5vh"
+      v-if="isWorkOrders"
+    >
+      <workOrderList :formCode="recordCode" />
     </el-dialog>
 
     <audio
@@ -235,7 +241,7 @@
                     :data="fileTableData"
                     style="width: 100%"
                     tooltip-effect="light"
-                    @row-click="getKnowledgeInfo"
+                    @row-click="getKnowledgeInfo($event, 'know')"
                     header-row-class-name="workDesk-table-header"
                   >
                     <el-table-column
@@ -464,7 +470,7 @@ export default {
         })
         this.isShowNotions = true
       } else {
-        this.getKnowledgeInfo(data)
+        this.getKnowledgeInfo(data, 'notice')
       }
     },
     toKfHtml() {
@@ -482,9 +488,14 @@ export default {
       let audio = document.getElementById('music')
       audio.play()
     },
-    getKnowledgeInfo(data) {
+    getKnowledgeInfo(data, type) {
+      let path = ''
+      type === 'know'
+        ? (path = '/workDesk/knowledgeShow')
+        : (path = '/workDesk/annoucementShow')
+
       this.$router.push({
-        path: '/workDesk/knowledgeShow',
+        path,
         query: {
           noticeCode: data.noticeCode,
           type: 'workDesk',

@@ -1,6 +1,7 @@
 <template>
   <div class="hexin">
     <h1 class="header"><span>{{noticeContent.noticeName}}</span></h1>
+    <el-divider></el-divider>
     <h3 class="header_fuzhu"><span>{{notice.createDt}}</span><el-divider direction="vertical"></el-divider><span>{{notice.userName}}</span></h3>
     <el-divider></el-divider>
     <h4  v-html="noticeContent.noticeContent" class="content"></h4>

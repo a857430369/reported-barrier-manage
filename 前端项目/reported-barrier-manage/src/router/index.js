@@ -19,7 +19,7 @@ const router = new Router({
 });
 
 export const whiteList = ['/workDesk/allPool', '/workDesk/pendingPool', '/workDesk/parameter', '/workDesk/classify', '/workDesk/employeesList', '/workDesk/workorderList', '/workDesk/cf-deployManage',
-  '/workDesk/noticeSee', '/workDesk/download', '/workDesk/noticeShow', '/workDesk/upload', '/workDesk/knowlegdeUser', '/workDesk/knowManage', '/workDesk/knowledgeShow'
+  '/workDesk/noticeSee', '/workDesk/download', '/workDesk/noticeShow', '/workDesk/upload', '/workDesk/knowlegdeUser', '/workDesk/knowManage', '/workDesk/knowledgeShow', '/workDesk/annoucementShow'
 ]
 //悬浮球配置
 // let fm = new FloatModule({

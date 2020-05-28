@@ -5,7 +5,7 @@
       <el-card
         :style="{
           height: screenHeight - 20 + 'px',
-          margin: '10px auto',
+          margin: '0px auto',
           width: '280px',
         }"
         v-if="MenuData.length !== 0"
@@ -151,20 +151,19 @@
                   <el-table-column
                     label="文件名称"
                     width="200px"
-                    show-overflow-tooltip
                     prop="fileName"
                   >
                     <template slot-scope="scope">
                       <el-popover
                         placement="bottom"
-                        width="200"
                         trigger="hover"
-                        v-if="scope.row.fileRemark"
+                        :title="scope.row.fileName"
                         :content="scope.row.fileRemark"
                       >
-                        <span slot="reference">{{ scope.row.fileName }}</span>
+                        <span style="white-space: nowrap;" slot="reference">{{
+                          scope.row.fileName
+                        }}</span>
                       </el-popover>
-                      <span v-else>{{ scope.row.fileName }}</span>
                     </template>
                   </el-table-column>
                   <el-table-column
@@ -979,7 +978,7 @@ export default {
       }
       if (fileId.length > 0) {
         this.$api.file.downloadMoreFile(fileId).then((res) => {
-          downloadFile(res.data, 'undefind.zip')
+          downloadFile(res.data, '业支门户资源包.zip')
         })
       } else {
         this.$message.error('请选择文件')
@@ -1150,7 +1149,7 @@ export default {
   width: 260px;
 }
 .el-header {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 .hightLine {
   width: 100%;

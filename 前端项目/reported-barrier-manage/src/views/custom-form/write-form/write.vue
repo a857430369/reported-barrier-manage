@@ -141,6 +141,7 @@
 
               <el-input v-if="item.valueType == 'textarea'"
                         type="textarea"
+                        class="model-write-textare-font"
                         :rows="4"
                         v-model="form['key-' + index]"
                         :placeholder="item.placeholder"></el-input>
@@ -316,9 +317,7 @@ export default {
         patherType: false,
         patherCode: ''
       },
-      fileValueList: [],
-      action: '',
-      result: false
+      fileValueList: []
     }
   },
   watch: {
@@ -613,8 +612,6 @@ export default {
     // 得到点单人员
     this.getDisposeUser()
 
-    this.action = this.$store.state.user.isTest ? 'http://localhost:10001/file/upload/' : 'http://132.110.64.161:30001/currency_need/file/upload/'
-
     if (this.modelCode) {
       // 访问时候
       let params = {
@@ -650,9 +647,26 @@ export default {
                 } else if (item.valueType == 'select' || item.valueType == 'check' || item.valueType == 'radio') {
                   text = '请选择' + item.fieldName
                 }
-                Vue.set(this.rules, 'key-' + (formIndex), [
-                  { required: true, message: text, trigger: 'blur' }
-                ])
+
+                //  验证规则
+                let ruleList = [ { required: true, message: text, trigger: 'blur' } ]
+
+                //  设置期望时间不超过两个小时
+                if (item.valueType == 'date' && item.defaultAdd && item.dateType == 'ymdhm') {
+                  const validateTime = (rule, value, callback) => {
+                    const date = new Date()
+                    const result = new Date(value)
+                    const minuter = parseInt((result - date) / 1000 / 60)
+                    // 得到分钟数
+                    if (minuter > 119) {
+                      callback()
+                    } else {
+                      callback(new Error('期望时间不能少于当前2小时'))
+                    }
+                  }
+                  ruleList.push({ validator: validateTime, trigger: 'blur' })
+                }
+                Vue.set(this.rules, 'key-' + (formIndex), ruleList)
             }
 
             // 设置form
@@ -700,6 +714,9 @@ export default {
 
             } else {
               Vue.set(this.form, 'key-' + (formIndex), '')
+              if (item.valueType == 'phone' && item.defaultAdd && !this.$store.state.user.isTest) {
+                Vue.set(this.form, 'key-' + (formIndex), this.$store.state.user.empSms)
+              }
             }
             formIndex++
           }
@@ -747,6 +764,12 @@ export default {
 .table-content-s {
   .el-table__header-wrapper {
     border-bottom: 1px solid #ebeef5;
+  }
+}
+
+.model-write-textare-font {
+  .el-textarea__inner {
+    font: 400 13.3333px Arial;
   }
 }
 

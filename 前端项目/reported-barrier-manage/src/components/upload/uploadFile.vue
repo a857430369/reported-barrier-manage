@@ -19,8 +19,7 @@
         <el-form-item>
           <el-input
           type="textarea"
-          :rows="2"
-          autosize
+          :rows="5"
           style="margin-bottom: 10px;width: 360px"
           maxlength="200"
           show-word-limit
@@ -121,9 +120,9 @@ export default {
 
     // 文件移除
     handleRemove(file, fileList) {
-      //console.log(file, fileList)
       this.filelist = fileList
       this.form.fileName = ''
+      this.newFile = ''
     },
 
     // 超出文件数量
@@ -142,8 +141,6 @@ export default {
         this.$message.error('上传头像图片大小不能超过 10MB!');
         this.filelist = []
       }else{
-        //console.log(this.filelist)
-        //console.log('1')
         this.form.fileName = parm.file.name.split('.')[0]
       }
     },
@@ -153,7 +150,8 @@ export default {
        this.$refs[formName].validate((valid) => {
          
          if(valid){
-           if(this.total == 0 ){
+           if(this.newFile){
+             if(this.total == 0 ){
               let code = objDeepCopy(this.menuCode)
               if(code === 'str'){
                 code = ""
@@ -189,6 +187,10 @@ export default {
            }else{
              this.$message('文件名称已存在，请重新命名')
            }
+           }else{
+             this.$message.error('请上传文件')
+           }
+           
          }
        })
     },

@@ -51,6 +51,7 @@
 
         <el-table-column prop="outFieldDesc"
                          label="模板描述"
+                         show-overflow-tooltip
                          width="300" />
 
         <el-table-column prop="createDate"

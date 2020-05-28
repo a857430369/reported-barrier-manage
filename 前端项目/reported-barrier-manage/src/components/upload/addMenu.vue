@@ -6,11 +6,21 @@
     width="30%"
     :before-close="modalClose">
     <el-form :model="form" :rules="rules" ref="form">
+      <el-form-item prop="patherName" v-if="menu.menuName">
+        <span class="allSize">添加所在分类</span>
+        <el-input
+          disabled
+          style="width: 100%"
+          placeholder="请输入分类名称"
+          v-model.trim="form.patherName"
+          clearable>
+        </el-input>
+      </el-form-item>
         <el-form-item prop="menuName">
-          <span class="allSize">目录名称</span>
+          <span class="allSize">分类名称</span>
           <el-input
             style="width: 100%"
-            placeholder="请输入目录名称"
+            placeholder="请输入分类名称"
             v-model.trim="form.menuName"
             clearable>
           </el-input>
@@ -35,12 +45,17 @@ export default {
     },
     menuCode: {
       type: String
+    },
+    menu: {
+      type: Object,
+      default: () => ({})
     }
   },
   // 默认数据
   data() {
     return {
       form: {
+        patherName: this.menu.menuName,
         menuName: '',
         patherCode: ''
       },
@@ -56,6 +71,8 @@ export default {
   // 创建dom前渲染
   created() {
     this.getAllFMenu()
+    console.log(this.menuCode)
+    console.log('111',this.menu)
   },
   // 所有方法
   methods: {
@@ -85,12 +102,14 @@ export default {
                   this.$message({message:'成功', type: 'success'})
                   this.$emit('getMenuAll')
                   this.$emit('getAll')
+                  this.$emit('handleHeaderFile')
                   this.modalClose()
                 }
                 else {this.$message('未知错误')}
               })
             }else{
               this.form = {
+                patherName: this.menu.menuName,
                 menuName: '',
                 patherCode: ''
               }

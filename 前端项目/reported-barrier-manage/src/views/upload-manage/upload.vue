@@ -6,7 +6,7 @@
         :style="{
           height: screenHeight - 20 + 'px',
           width: '280px',
-          margin: '10px auto',
+          margin: '0px auto',
         }"
       >
         <!-- 导航栏数据 -->
@@ -146,22 +146,18 @@
                 style="width: 100%"
               >
                 <el-table-column type="selection" width="55"> </el-table-column>
-                <el-table-column
-                  label="文件名称"
-                  width="200px"
-                  show-overflow-tooltip
-                >
+                <el-table-column label="文件名称" width="200px">
                   <template slot-scope="scope">
                     <el-popover
                       placement="bottom"
-                      width="200"
                       trigger="hover"
-                      v-if="scope.row.fileRemark"
+                      :title="scope.row.fileName"
                       :content="scope.row.fileRemark"
                     >
-                      <span slot="reference">{{ scope.row.fileName }}</span>
+                      <span style="white-space: nowrap;" slot="reference">{{
+                        scope.row.fileName
+                      }}</span>
                     </el-popover>
-                    <span v-else>{{ scope.row.fileName }}</span>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -284,7 +280,7 @@
     <el-dialog
       :visible.sync="reName"
       width="30%"
-      title="修改文件名"
+      title="修改文件内容"
       destroy-on-close
       :before-close="handleClose"
     >
@@ -297,8 +293,7 @@
         <el-form-item v-if="form.fileType">
           <el-input
             type="textarea"
-            :rows="2"
-            autosize
+            :rows="5"
             maxlength="200"
             show-word-limit
             placeholder="请输入描述内容"
@@ -1147,7 +1142,7 @@ export default {
         fileId.push(this.multipleSelection[key].fileId)
       }
       this.$api.file.downloadMoreFile(fileId).then((res) => {
-        downloadFile(res.data, 'undefind.zip')
+        downloadFile(res.data, '业支门户资源包.zip.zip')
       })
     },
     // 批量移动
@@ -1338,7 +1333,7 @@ export default {
   width: 26px;
 }
 .el-header {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 .hightLine {
   width: 100%;

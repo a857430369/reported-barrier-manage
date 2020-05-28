@@ -1,8 +1,7 @@
 <template>
   <div class="custom_style">
     <el-container>
-      <!-- 头部容器 -->
-      <el-header style="">
+      <el-header>
         <el-card class="filter">
           <FilterTable
             ref="filter"
@@ -18,7 +17,6 @@
         </el-card>
       </el-header>
 
-      <!-- 主内容容器 -->
       <el-main>
         <el-tabs
           v-model="currTabPane"
@@ -31,9 +29,11 @@
             :label="item.label"
             :name="item.key"
           >
-            <span slot="label"
-              ><i :class="item.icon"></i> {{ item.label }}</span
-            >
+            <el-badge is-dot>
+              <span slot="label"
+                ><i :class="item.icon"></i> {{ item.label }}</span
+              >
+            </el-badge>
           </el-tab-pane>
           <TableList
             ref="table"
@@ -63,16 +63,16 @@ export default {
         { label: '处理中', key: 'being', icon: 'el-icon-finished' },
         { label: '已处理', key: 'processed', icon: 'el-icon-circle-check' },
       ],
-      recordFlow: 'J,D', //待处理
+      recordFlow: 'J,D',
       isCollapse: true,
-      workOrderList: [], //工单列表
-      classifyList: [], //分类树
-      recordClassifyOption: [], //大类列表
-      urgentGradeOption: [], //优先级列表
-      branchRecordOption: [], //是否子单列表
-      receiptSourceOption: [], //工单来源列表
-      recordFlowOption: [], //流程进度列表
-      currTabPane: 'pending', //当前所在的tab
+      workOrderList: [],
+      classifyList: [],
+      recordClassifyOption: [],
+      urgentGradeOption: [],
+      branchRecordOption: [],
+      receiptSourceOption: [],
+      recordFlowOption: [],
+      currTabPane: 'pending',
       operationWidth: '350px',
     }
   },

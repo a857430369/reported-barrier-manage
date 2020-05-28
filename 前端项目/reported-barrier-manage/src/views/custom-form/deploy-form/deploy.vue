@@ -819,7 +819,7 @@ export default {
               {
                 "fieldName": "期望完成时间",
                 "valueType": "date",
-                "dateType": "ymd",
+                "dateType": "ymdhm",
                 "orderBy": 1,
                 "required": true,
               },{
@@ -829,9 +829,7 @@ export default {
                 "required": true,
               }
             ]
-
           }
-
         })
         .catch(error => {
           this.loading = false;

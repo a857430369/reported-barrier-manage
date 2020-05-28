@@ -125,7 +125,14 @@ let router = [
           title: '知识库展示',
         },
       },
-
+      {
+        path: 'annoucementShow',
+        name: '通知通告详情',
+        component: load('notice/notice_new'),
+        meta: {
+          title: '通知通告详情',
+        },
+      },
     ],
   },
 

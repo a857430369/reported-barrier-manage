@@ -2,18 +2,27 @@
 <div class="total-container">
 	<el-dialog :visible.sync="isShowNotionDialog" class="d-f-container" width="60%" top="5vh">
     <div class="total-dialog-table-notian">
-			<h2>{{ notionList.length > 0 ? notionList[0].noticeName : '' }}</h2>
+			<h2>{{ notionObj.noticeName }}</h2>
     	<el-divider></el-divider>
 				<h3 class="noRead-notice-header">
-					<span>{{ notionList.length > 0 ? getBigTime(notionList[0].createDt) : '' }}</span>
-					<span>{{ notionList.length > 0 ? notionList[0].userName : '' }}</span>
+					<span style="margin-right: 20px">{{ notionObj.createDt }}</span>
+					<span>{{ notionObj.userName }}</span>
 				</h3>
     	<el-divider></el-divider>
 			<div class="noRead-notice-content" style="text-align: unset">
-				<div class="main-content" v-html="notionList.length > 0 ? notionList[0].noticeContent : ''"></div>
+				<div class="main-content" v-html="notionObj.noticeContent"></div>
 			</div>
 
-			<div>123</div>
+			<div class="total-dialog-table-arrow">
+				<span>
+					<i class="el-icon-back" @click="setNotionIndex('-')"></i>
+				</span>
+				<label>第{{ notionIndex+1 }}条 / 共{{ notionList.length }}条</label>
+				<span>
+					<i class="el-icon-right" @click="setNotionIndex('+')"></i>
+				</span>
+			</div>
+
     </div>
 	</el-dialog>
 
@@ -37,10 +46,27 @@ export default {
 			classifyList: [],
 			show: false,
 			isShowNotionDialog: false,
-			notionList: []
+			notionList: [],
+			notionIndex: 0
+		}
+	},
+	computed: {
+		notionObj() {
+			if (this.notionList.length > 0) {
+				return this.notionList[this.notionIndex]
+			} else {
+				return {}
+			}
 		}
 	},
 	methods: {
+		setNotionIndex(type) {
+			if (type == '+') {
+				(this.notionList.length > this.notionIndex + 1) && this.notionIndex++
+			} else {
+				(this.notionIndex > 0) && this.notionIndex--
+			}
+		},
     getBigTime(time) {
       return time.slice(0, 10)
     },		
@@ -52,32 +78,9 @@ export default {
 			this.$api.manage.noticeSecurityList().then(res => {
 				this.notionList = res.content
 
-// 				this.notionList = [
-// 					{
-// 	"createCode": "ff80808169bee3150169c2552e9001d7",
-// 	"userName": "卓群斐",
-//   "createDt": "2020-05-26 16:24:26",
-//   "createIp": "132.110.64.156",
-//   "lastCode": "ff80808169bee3150169c2552e9001d7",
-//   "lastDt": "2020-05-26 16:24:26",
-//   "lastIp": "132.110.64.156",
-//   "noticeCode": "00000000724f407a0172501531d20006",
-//   "noticeName": "关于AD域密码修改的公告",
-//   "noticeSummary": null,
-//   "noticeContent": "<p><span style=\"font-size: 14pt;\">近来有同事反映使用省统一VPN、办公云等系统时，用帐号登录出现新密码无效只认旧密码的情况。经过排查，发现是由于微软的AD域服务器软件存在BUG，具体为在WINDOWS2003和2016共存的环境下，密码修改后会偶然发生帐号supplementalCredentials属性没有被更新成功，会导致旧密码使用MD5加密方式仍然可以登录的情况发生。</span></p>\n<p><span style=\"font-size: 14pt;\">目前正在组织解决，在该问题解决之前，若使用中出现类似密码故障，请用网页浏览器登录acc.gdtel.com进行密码修改。修改密码后，一般情况下新密码可正常使用；若修改密码后仍不正常，请继续修改成别的密码。</span></p>",
-//   "noticeType": "S",
-//   "noticeUrgent": "P",
-//   "noticeStatus": "S",
-//   "fileId": "",
-//   "noticeAppoint": "A",
-//   "clickCount": 0,
-//   "expireDt": null,
-//   "knowledgeCode": null
-// }
-// 				]
-
 				if (this.notionList.length > 0) {
 					this.isShowNotionDialog = true
+					this.notionIndex = 0
 				}
 			})
 		},
@@ -153,13 +156,7 @@ export default {
 	}
 }
 
-.noRead-notice-header {
-
-}
-
 .noRead-notice-content {
-	.to-people {}
-
 	.main-content {
 		background: #fafafe;		
 	}
@@ -167,7 +164,6 @@ export default {
 
 .noRead-notice-footer {
 	display: flex;
-	// justify-content:flex-start;
 	flex-direction:row-reverse;
 
 	&>div {
@@ -181,6 +177,55 @@ export default {
 	}
 }
 
+.total-dialog-table-arrow {
+	text-align: center;
+	margin-top: 15px;
+
+	label {
+		vertical-align: top;
+		line-height: 30px;
+		display: inline-block;
+		margin: 0 20px;
+	}
+
+	span {
+		text-align: initial;
+		display: inline-block;
+		background: #ccc;
+		height: 30px;
+		width: 84px;
+		position: relative;
+		border-radius: 4px;		
+		i {
+			position: absolute;
+			font-size: 16px;
+			width: 100%;
+    	height: 100%;
+			line-height: 30px;
+			transition: padding-left 0.5s;
+			color: #000;	
+		}
+	}
+	span:first-child {
+		i {
+			padding-left: 30px;
+		}
+		i:hover {
+			padding-left: 0;
+			cursor: pointer;
+		}
+	}
+	span:last-child {
+		i {
+			padding-left: 30px;
+		}
+		i:hover {
+			padding-left: 60px;
+			cursor: pointer;
+		}
+	}
+
+}
 
 </style>
 
