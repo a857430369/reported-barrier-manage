@@ -1,28 +1,28 @@
 <template>
   <div class="custom_style">
-    <el-card class="box-card" style="width: 99%; margin: 20px auto;" >
-          <div class="filter">
-            <el-row type="flex" justify="space-between"  style='height:36px'>
-            <el-form
-              :model="Select"
-              style="margin:0px;height:40px;margin-left:0px;"
-            >
-              <!--搜索功能模块 -->
-              <el-col :span="5">
-              <el-form-item >
+    <el-card class="box-card" style="width: 99%; margin: 0 auto;">
+      <div class="filter">
+        <el-row type="flex" justify="space-between" style="height:36px">
+          <el-form
+            :model="Select"
+            style="margin:0px;height:40px;margin-left:0px;"
+          >
+            <!--搜索功能模块 -->
+            <el-col :span="5">
+              <el-form-item>
                 <el-input
                   v-model="Select.noticeName"
-                  style='width:96%'
+                  style="width:96%"
                   placeholder="请输入通知标题"
                   clearable
                 ></el-input>
               </el-form-item>
-              </el-col>
-              <el-col :span="5" >
+            </el-col>
+            <el-col :span="5">
               <el-form-item>
                 <el-select
                   v-model="Select.noticeType"
-                  style='width:96%'
+                  style="width:96%"
                   clearable
                   placeholder="请选择通知类型"
                 >
@@ -35,12 +35,12 @@
                   </el-option>
                 </el-select>
               </el-form-item>
-              </el-col>
-              <el-col :span="5">
+            </el-col>
+            <el-col :span="5">
               <el-form-item>
                 <el-select
                   v-model="Select.noticeUrgent"
-                  style='width:96%'
+                  style="width:96%"
                   clearable
                   placeholder="请选择紧急度"
                 >
@@ -53,12 +53,12 @@
                   </el-option>
                 </el-select>
               </el-form-item>
-              </el-col>
-              <el-col :span="8">
-              <el-form-item >
+            </el-col>
+            <el-col :span="8">
+              <el-form-item>
                 <el-date-picker
                   v-model="Select.seleceDate"
-                  style='width:96%'
+                  style="width:96%"
                   type="datetimerange"
                   range-separator="至"
                   start-placeholder="开始日期"
@@ -67,9 +67,9 @@
                 >
                 </el-date-picker>
               </el-form-item>
-              </el-col>
-              <el-col :span="1" >
-              <el-form-item >
+            </el-col>
+            <el-col :span="1">
+              <el-form-item>
                 <el-button
                   icon="el-icon-search"
                   type="primary"
@@ -78,15 +78,15 @@
                   >搜索</el-button
                 >
               </el-form-item>
-              </el-col>
-            </el-form>
-          </el-row>
-          </div>
+            </el-col>
+          </el-form>
+        </el-row>
+      </div>
     </el-card>
     <el-tabs
       type="border-card"
       v-model="currTabPane"
-      style="width: 99%; margin: -15px auto;"
+      style="width: 99%; margin: 5px auto;"
       @tab-click="handleClick"
     >
       <el-tab-pane key="1" name="1">
@@ -95,12 +95,16 @@
       ></el-tab-pane>
       <el-tab-pane key="2" name="2">
         <span slot="label"
-          ><i class="el-icon-warning-outline" style="color:red"></i> 未读通告</span
+          ><i class="el-icon-warning-outline" style="color:red"></i>
+          未读通告</span
         >
         <tableGuy :Form="form1" v-if="test1" ref="child"></tableGuy
       ></el-tab-pane>
       <el-tab-pane key="3" name="3">
-        <span slot="label"><i class="el-icon-circle-check" style="color:#00BB00"></i> 已读通告</span>
+        <span slot="label"
+          ><i class="el-icon-circle-check" style="color:#00BB00"></i>
+          已读通告</span
+        >
         <tableGuy :Form="form2" v-if="test2" ref="child"></tableGuy
       ></el-tab-pane>
       <el-tab-pane key="4" name="4">
@@ -255,8 +259,8 @@ export default {
   overflow: hidden !important;
 }
 /deep/.el-form-item__content {
-    line-height: 35px;
-    position: relative;
-    font-size: 14px;
+  line-height: 35px;
+  position: relative;
+  font-size: 14px;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="custom_style">
     <el-container>
       <!-- 头部容器 -->
-      <el-header style="margin-top:20px;height:145px">
+      <el-header style="height:145px">
         <el-card class="filter">
           <el-form ref="searchParams" :model="searchParams" label-width="100px">
             <el-row type="flex" style="margin:0 5%">

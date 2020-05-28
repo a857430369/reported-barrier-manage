@@ -7,7 +7,7 @@
       label-position="right"
       :rules="dataFormRules"
     >
-      <el-form-item 
+      <el-form-item
         label="文章标题:"
         :label-width="formLabelWidth"
         prop="noticeName"
@@ -19,7 +19,7 @@
           clearable
         ></el-input>
       </el-form-item>
-      <el-form-item label="关键字:" :label-width="formLabelWidth" >
+      <el-form-item label="关键字:" :label-width="formLabelWidth">
         <el-input
           v-model.trim="form.noticeSummary"
           autocomplete="off"
@@ -27,29 +27,28 @@
           clearable
         ></el-input>
       </el-form-item>
-      <el-row :gutter="10" >
+      <el-row :gutter="10">
         <el-col :span="8">
           <el-form-item
-            
             label="接收机构:"
             :label-width="formLabelWidth"
             prop="noticeAppoint"
           >
             <!-- <el-col :span="20"> -->
-              <el-select
-                v-model="form.noticeAppoint"
-                style="width:100%;"
-                placeholder="请选择"
-                @change="check(form.noticeAppoint)"
+            <el-select
+              v-model="form.noticeAppoint"
+              style="width:100%;"
+              placeholder="请选择"
+              @change="check(form.noticeAppoint)"
+            >
+              <el-option
+                v-for="item in WayList"
+                :key="item.id"
+                :label="item.label"
+                :value="item.id"
               >
-                <el-option
-                  v-for="item in WayList"
-                  :key="item.id"
-                  :label="item.label"
-                  :value="item.id"
-                >
-                </el-option>
-              </el-select>
+              </el-option>
+            </el-select>
             <!-- </el-col>
             <el-col :span="4" v-if="way"
               ><el-button type="primary" @click="handleChoice()" size='medium '
@@ -76,13 +75,19 @@
             :label-width="formLabelWidth"
             prop="orgCode"
           >
-          <el-cascader
-            v-model="form.orgCode"
-            :options="optionsOrg"
-            style="width:100%;"
-            :props="{ expandTrigger: 'hover',emitPath:false,checkStrictly: true,value:'orgCode', label:'orgName' }"
-             @change="handleChange"
-           ></el-cascader>
+            <el-cascader
+              v-model="form.orgCode"
+              :options="optionsOrg"
+              style="width:100%;"
+              :props="{
+                expandTrigger: 'hover',
+                emitPath: false,
+                checkStrictly: true,
+                value: 'orgCode',
+                label: 'orgName',
+              }"
+              @change="handleChange"
+            ></el-cascader>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -91,18 +96,27 @@
             :label-width="formLabelWidth"
             prop="knowledgeCode"
           >
-          <el-cascader
-            v-model="form.knowledgeCode"
-            :options="options"
-            style="width:100%;"
-            :props="{ expandTrigger: 'hover',emitPath:false,checkStrictly: true,value:'knowledgeCode', label:'knowledgeName' }"
-           
-           ></el-cascader>
+            <el-cascader
+              v-model="form.knowledgeCode"
+              :options="options"
+              style="width:100%;"
+              :props="{
+                expandTrigger: 'hover',
+                emitPath: false,
+                checkStrictly: true,
+                value: 'knowledgeCode',
+                label: 'knowledgeName',
+              }"
+            ></el-cascader>
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row >
-        <el-form-item label="公告内容:" :label-width="formLabelWidth" prop="tinymceHtml">
+      <el-row>
+        <el-form-item
+          label="公告内容:"
+          :label-width="formLabelWidth"
+          prop="tinymceHtml"
+        >
           <el-card style="height:100%;" shadow="never">
             <!-- <quill v-bind:value='content'    @textareaData='text'></quill> -->
             <!-- <tinymce v-bind:value='content' @textareaData='text'></tinymce> -->
@@ -141,12 +155,11 @@
         </el-form-item>
       </el-row>
       <center>
-      <div class="demo-drawer__footer">
-        <el-button type="primary" @click="submitForm()">发布</el-button>
-      </div>
-    </center>
+        <div class="demo-drawer__footer">
+          <el-button type="primary" @click="submitForm()">发布</el-button>
+        </div>
+      </center>
     </el-form>
-    
   </div>
 </template>
 <script>
@@ -192,6 +205,7 @@ import 'tinymce/plugins/help'
 import 'tinymce/plugins/autosave'
 //富文本框属性
 const toolbarOptions = []
+import { baseURL } from '@/utils/request.js'
 export default {
   props: {
     visible: {
@@ -218,11 +232,11 @@ export default {
     return {
       fileList: [],
       options: [],
-      optionsOrg:[],
-      knowledge:false,//知识库分类
-      Summary:true,//概要显示
-      SummaryWord:false,//关键字显示
-      NoUrgent:true,//紧急度显示
+      optionsOrg: [],
+      knowledge: false, //知识库分类
+      Summary: true, //概要显示
+      SummaryWord: false, //关键字显示
+      NoUrgent: true, //紧急度显示
       fileshow: true, //附件上传显示
       contentIs: true, //富文本框显示
       contentshow: false, //文本框显示
@@ -234,7 +248,7 @@ export default {
         noticeType: 'K',
         noticeUrgent: 'P',
         noticeContent: '',
-        orgCode:'',
+        orgCode: '',
       },
       way: false, //指点按钮显示
       fileAll: [], //所有文件数组
@@ -251,14 +265,15 @@ export default {
             trigger: 'blur',
           },
         ],
-        orgCode:[
+        orgCode: [
           { required: true, message: '请选择知识库分类', trigger: 'change' },
         ],
-        knowledgeCode:[
+        knowledgeCode: [
           { required: true, message: '请选择知识库分类', trigger: 'change' },
         ],
         noticeType: [
-          { required: true, message: '请选择通知类型', trigger: 'change' },,
+          { required: true, message: '请选择通知类型', trigger: 'change' },
+          ,
         ],
         noticeSummary: [
           { required: true, message: '请输入公告摘要', trigger: 'blur' },
@@ -306,7 +321,8 @@ export default {
         {
           id: 'S',
           label: '系统通知',
-        },{
+        },
+        {
           id: 'Z',
           label: '报障通知',
         },
@@ -380,7 +396,7 @@ export default {
             case 'file':
             default:
           }
-          let Allurl = 'http://132.110.64.161:30001/kftd/yzmh/uploadFile'
+          let Allurl = baseURL + '/uploadFile/'
           if (meta.filetype == 'image') {
             let input = document.createElement('input') //创建一个隐藏的input
             input.setAttribute('accept', filetype)
@@ -493,7 +509,7 @@ export default {
       this.assign = msg
     },
     //
-    handleChange(val){
+    handleChange(val) {
       console.log(val)
     },
     // 上传文件方法
@@ -522,7 +538,8 @@ export default {
           {
             id: 'S',
             label: '系统通知',
-          },{
+          },
+          {
             id: 'M',
             label: '短信通知',
           },
@@ -531,14 +548,15 @@ export default {
         this.way = true //显示指定按钮
         this.contentIs = true //显示富文本框
         this.contentshow = false //文本框不显示
-        this.knowledge=false
-        this.NoUrgent=true
+        this.knowledge = false
+        this.NoUrgent = true
       } else {
         this.TypeList = [
           {
             id: 'S',
             label: '系统通知',
-          },{
+          },
+          {
             id: 'Z',
             label: '报障通知',
           },
@@ -547,8 +565,8 @@ export default {
         this.form.noticeType = 'K'
         this.contentIs = true
         this.contentshow = false
-        this.knowledge=false
-        this.NoUrgent=true
+        this.knowledge = false
+        this.NoUrgent = true
       }
     },
     //附件上传组件显示
@@ -557,45 +575,45 @@ export default {
         this.fileshow = false
         this.contentIs = false
         this.contentshow = true
-        this.NoUrgent=true
-        this.Summary=true
-        this.knowledge=false
-        this.SummaryWord=false
+        this.NoUrgent = true
+        this.Summary = true
+        this.knowledge = false
+        this.SummaryWord = false
         this.form.noticeUrgent = 'P'
-        this.form.knowledgeCode=''
+        this.form.knowledgeCode = ''
         this.Urgent(this.form.noticeUrgent)
         this.form.noticeContent = ''
-      } else if(val == 'S'){
+      } else if (val == 'S') {
         this.fileshow = true
         this.contentIs = true
-        this.knowledge=false
-        this.Summary=true
-        this.SummaryWord=false
+        this.knowledge = false
+        this.Summary = true
+        this.SummaryWord = false
         this.contentshow = false
-        this.NoUrgent=true
-        this.form.knowledgeCode=''
+        this.NoUrgent = true
+        this.form.knowledgeCode = ''
         this.form.noticeUrgent = 'P'
         this.Urgent(this.form.noticeUrgent)
         this.form.noticeContent = ''
-      }else if(val == 'Z'){
+      } else if (val == 'Z') {
         this.fileshow = true
-        this.NoUrgent=false
-        this.knowledge=false
+        this.NoUrgent = false
+        this.knowledge = false
         this.contentIs = true
         this.contentshow = false
-        this.Summary=true
-        this.form.knowledgeCode=''
-        this.SummaryWord=false
+        this.Summary = true
+        this.form.knowledgeCode = ''
+        this.SummaryWord = false
         this.form.noticeUrgent = 'J'
         this.Urgent(this.form.noticeUrgent)
         this.form.noticeContent = ''
-      }else if(val == 'K'){
+      } else if (val == 'K') {
         this.fileshow = true
-        this.NoUrgent=false
+        this.NoUrgent = false
         this.contentIs = true
-        this.knowledge=true
-        this.Summary=false
-        this.SummaryWord=true
+        this.knowledge = true
+        this.Summary = false
+        this.SummaryWord = true
         this.contentshow = false
         this.form.noticeUrgent = 'P'
         this.Urgent(this.form.noticeUrgent)
@@ -603,18 +621,24 @@ export default {
       }
     },
     //查询所有知识库分类
-    findDown(){
+    findDown() {
       this.$api.knowManage.findAll().then((res) => {
         if (res.code == 0) {
-          this.options=res.content
-        }else{
+          this.options = res.content
+          // if(res.content.length==0){
+          //     // this.$message.error('无知识库分类，请先添加！')
+          //     this.$confirm('无知识库分类，请先添加！', '提示', {}).then(() => {
+          //       this.$emit('Jump')
+          //     })
+          // }
+        } else {
           this.$message.error('请检查网络！')
         }
       })
       this.$api.notice.findAllBZXTOrg().then((res) => {
         if (res.code == 0) {
-          this.optionsOrg=res.content
-        }else{
+          this.optionsOrg = res.content
+        } else {
           this.$message.error('请检查网络！')
         }
       })
@@ -683,7 +707,11 @@ export default {
     },
     //保存
     Nsave() {
-      if (this.form.noticeType == 'S' || this.form.noticeType == 'Z'|| this.form.noticeType == 'K') {
+      if (
+        this.form.noticeType == 'S' ||
+        this.form.noticeType == 'Z' ||
+        this.form.noticeType == 'K'
+      ) {
         this.form.noticeContent = this.tinymceHtml
       }
       let length = this.form.noticeContent.length
@@ -717,7 +745,7 @@ export default {
                   this.editLoading = false
                   if (res.code == 0) {
                     this.$message({ message: '保存成功', type: 'success' })
-                    this.$router.push({path:'/knowManage'})
+                    this.$router.push({ path: '/knowManage' })
                   } else {
                     this.$message({ message: '保存失败, ', type: 'error' })
                   }
@@ -733,7 +761,11 @@ export default {
     },
     //发布
     submitForm() {
-      if (this.form.noticeType == 'S' || this.form.noticeType == 'Z' || this.form.noticeType == 'K') {
+      if (
+        this.form.noticeType == 'S' ||
+        this.form.noticeType == 'Z' ||
+        this.form.noticeType == 'K'
+      ) {
         this.form.noticeContent = this.tinymceHtml
       }
       let length = this.form.noticeContent.length
@@ -748,47 +780,48 @@ export default {
         for (let i = 0; i < this.fileAll.length; i++) {
           this.form.fileId = this.fileAll[i].fileId + ',' + this.form.fileId
         }
-          this.$refs.dataForm.validate((valid) => {
-            if (valid) {
-              this.$confirm('确认发布吗？', '提示', {}).then(() => {
-                this.editLoading = true
-                if (this.form.noticeAppoint == 'A') {
-                  this.assign = []
-                  this.form.orgCode=''
-                }
-                const activeEditor = tinymce.activeEditor
-                const editBody = activeEditor.getBody()
-                activeEditor.selection.select(editBody)
-                var textContent = activeEditor.selection.getContent({ format: 'text' })
-                this.form.noticeText=textContent//获取纯文本
-                this.form.noticeStatus = 'S'
-                let dev = { notice: {}, data:this.form.orgCode }
-                dev.notice = Object.assign({}, this.form)
-                this.$api.notice.saveKnowledgeInfo(dev).then((res) => {
-                  this.editLoading = false
-                  if (res.code == 0) {
-                    this.$message({ message: '发布成功', type: 'success' })
-                    this.form={
-                        noticeAppoint: 'A',
-                        fileId: '',
-                        noticeType: 'K',
-                        noticeUrgent: 'P',
-                        noticeContent: '',
-                      }
-                    this.check(this.form.noticeAppoint)
-                    this.tinymceHtml=''
-                    this.$refs.upload.clearFiles();
-                  
-                  } else {
-                    this.$message({ message: '发布失败, ', type: 'error' })
-                  }
-                })
+        this.$refs.dataForm.validate((valid) => {
+          if (valid) {
+            this.$confirm('确认发布吗？', '提示', {}).then(() => {
+              this.editLoading = true
+              if (this.form.noticeAppoint == 'A') {
+                this.assign = []
+                this.form.orgCode = ''
+              }
+              const activeEditor = tinymce.activeEditor
+              const editBody = activeEditor.getBody()
+              activeEditor.selection.select(editBody)
+              var textContent = activeEditor.selection.getContent({
+                format: 'text',
               })
-            } else {
-              console.log('error submit!!')
-              return false
-            }
-          })
+              this.form.noticeText = textContent //获取纯文本
+              this.form.noticeStatus = 'S'
+              let dev = { notice: {}, data: this.form.orgCode }
+              dev.notice = Object.assign({}, this.form)
+              this.$api.notice.saveKnowledgeInfo(dev).then((res) => {
+                this.editLoading = false
+                if (res.code == 0) {
+                  this.$message({ message: '发布成功', type: 'success' })
+                  this.form = {
+                    noticeAppoint: 'A',
+                    fileId: '',
+                    noticeType: 'K',
+                    noticeUrgent: 'P',
+                    noticeContent: '',
+                  }
+                  this.check(this.form.noticeAppoint)
+                  this.tinymceHtml = ''
+                  this.$refs.upload.clearFiles()
+                } else {
+                  this.$message({ message: '发布失败, ', type: 'error' })
+                }
+              })
+            })
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
       }
     },
   },
@@ -799,7 +832,7 @@ export default {
 .demo-drawer__content {
   margin: 30px auto;
 }
-/deep/.el-form-item__content{
-  line-height: unset!important
+/deep/.el-form-item__content {
+  line-height: unset !important;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="custom_style" style='margin: 20px auto;'>
+  <div class="custom_style">
     <el-row type="flex" justify="center" align="middle" class="row-style">
       <el-tabs
         type="border-card"
@@ -9,8 +9,8 @@
         @tab-click="handleSelect"
       >
         <el-tab-pane key="1">
-          <span slot="label" style='color:#00BB00	'
-            ><i class="el-icon-circle-plus-outline" ></i> 新增公告</span
+          <span slot="label" style="color:#00BB00	"
+            ><i class="el-icon-circle-plus-outline"></i> 新增公告</span
           >
           <add ref="add"></add
         ></el-tab-pane>
@@ -18,13 +18,11 @@
           <span slot="label"
             ><i class="el-icon-document-copy"></i> 公告管理</span
           >
-          <record  ref='children'></record
+          <record ref="children"></record
         ></el-tab-pane>
         <el-tab-pane key="3">
-          <span slot="label"
-            ><i class="el-icon-edit-outline"></i> 草稿箱</span
-          >
-          <manage ref='chlid'></manage
+          <span slot="label"><i class="el-icon-edit-outline"></i> 草稿箱</span>
+          <manage ref="chlid"></manage
         ></el-tab-pane>
       </el-tabs>
     </el-row>
@@ -58,10 +56,10 @@ export default {
   methods: {
     //导航栏事件
     handleSelect(key, keyPath) {
-      if(this.currTabPane=='1'){
-        this.$refs.chlid.findAll();
-      }else if(this.currTabPane=='2'){
-        this.$refs.children.findRecordAll();
+      if (this.currTabPane == '2') {
+        this.$refs.chlid.findAll()
+      } else if (this.currTabPane == '1') {
+        this.$refs.children.findRecordAll()
       }
     },
     handleClick() {

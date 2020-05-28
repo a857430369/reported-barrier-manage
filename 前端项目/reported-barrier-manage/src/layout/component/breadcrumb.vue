@@ -107,7 +107,7 @@ export default {
   font-size: 15px;
   line-height: 20px;
   margin-left: 22px;
-  margin-bottom: -15px;
+  margin-top: 5px;
 
   .no-redirect {
     color: #97a8be;

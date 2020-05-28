@@ -24,7 +24,7 @@
               <!-- <template slot-scope="pstatus"><el-tag :type="pstatus.row.noticeType=='S'? 'primary':'success'" effect="plain">
             {{pstatus.row.noticeType=='S'? '系统通知':'短信通知'}}</el-tag></template> -->
             </el-table-column>
-            <el-table-column label="发布时间" prop="createDt" align="center"  >
+            <el-table-column label="发布时间" prop="createDt" align="center"  width='170'>
             </el-table-column>
             <el-table-column label="操作" fixed='right' align="center" >
                 <template slot-scope="scope">

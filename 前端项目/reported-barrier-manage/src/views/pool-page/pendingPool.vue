@@ -2,7 +2,7 @@
   <div class="custom_style">
     <el-container>
       <!-- 头部容器 -->
-      <el-header style="margin-top:20px">
+      <el-header style="">
         <el-card class="filter">
           <el-row type="flex" justify="space-between">
             <el-col :span="24" style="display:flex">

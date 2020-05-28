@@ -3,7 +3,7 @@
     <div>
           <el-form
             :model="Select"
-            style="margin:-10px auto;height:36px;margin-left:40px;"
+            style="margin:-3px auto 10px 0;height:36px"
           >
           <el-row >
             <!--搜索功能模块 -->
@@ -81,7 +81,7 @@
             </el-row>
           </el-form>
     </div>
-    <el-table border :data="tableData" style="width: 95%; margin: 0px auto;">
+    <el-table border :data="tableData" style="width: 100%; margin: 0px auto;">
       <el-table-column label="序号" type="index" align="center" width="65px">
       </el-table-column>
       <el-table-column

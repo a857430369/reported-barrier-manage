@@ -46,7 +46,7 @@
         <el-tag :type="pstatus.row.noticeUrgent=='P'? 'primary':'danger'" effect="plain">
         {{pstatus.row.noticeUrgent=='P'? '普通':'紧急'}}</el-tag></template>
       </el-table-column>
-      <el-table-column label="发布时间" prop="createDt" align="center" >
+      <el-table-column label="发布时间" prop="createDt" align="center" width='170'>
       </el-table-column>
       <el-table-column label="操作" fixed='right' align="center" width="150">
         <template slot-scope="scope">

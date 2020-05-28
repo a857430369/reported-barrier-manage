@@ -4,9 +4,10 @@ import { Message } from 'element-ui';
 import storage from './storage'
 
 export const isTest = true
+export const baseURL = 'http://132.110.64.161:30001/kftd/yzmh'
 const service = axios.create({
   // baseURL: 'http://132.110.64.159:20580/api/',
-  baseURL: isTest ? 'http://127.0.0.1:8082/api/' : 'http://132.110.64.161:30001/kftd/yzmh/api/',
+  baseURL: isTest ? 'http://127.0.0.1:8082/api/' : baseURL + '/api/',
   timeout: 10000
 })
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'

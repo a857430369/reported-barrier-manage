@@ -18,8 +18,8 @@
             <span style="margin:0px auto;text-align:right"><h4>已阅次数：{{this.message.clickCount}}</h4></span>
             <!-- </el-col> -->
           </el-row>
-          <h1><span  style="margin:0px 20px 0px 28px;text-align:left">{{this.message.noticeName}}</span>
-          <span style="text-align:left;color:red">{{this.message.noticeUrgent=='J'?'(紧急通知)':''}}</span></h1>
+          <h1 style='text-align:center'><span  style="margin:0px 20px 0px 28px">{{this.message.noticeName}}</span>
+          <span style="color:red">{{this.message.noticeUrgent=='J'?'(紧急通知)':''}}</span></h1>
           </div>  
           <el-row style="margin:10px auto;text-align: center">
             <!-- <h3 v-if="sendUser">发布者：{{this.message.sendName}}</h3> -->
@@ -29,7 +29,7 @@
         <el-divider></el-divider>
             <el-row  >
               <el-col>
-                <h4 >
+                <h4 style='text-align:center'>
                   <span style='margin:0px 30px 0px 0px'>{{this.message.createDt}}</span>
                   <span>{{this.message.sendName}}</span>
                 </h4>

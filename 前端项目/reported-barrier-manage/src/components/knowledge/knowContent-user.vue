@@ -83,6 +83,7 @@ export default {
 <style scoped>
 .hexin{
   height: 100%;
+  padding: 20px;
   overflow: scroll;
   text-align: center;
 }

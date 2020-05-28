@@ -2,7 +2,7 @@
   <div class="custom_style">
     <el-container>
       <!-- 头部容器 -->
-      <el-header style="margin-top:20px">
+      <el-header>
         <el-card class="filter">
           <user-filter
             ref="userFilter"

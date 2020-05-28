@@ -1,15 +1,14 @@
 <template>
-  <div class="parameter custom_style">
+  <div class="custom_style">
     <el-container>
       <!-- 头部容器 -->
-      <el-header style="margin-top:20px">
+      <el-header>
         <el-card class="filter">
           <el-row>
             <el-col :span="18">
               <el-button
                 type="primary"
                 size="medium"
-                style="margin-bottom:5px"
                 icon="el-icon-plus"
                 @click="addparameterDialog = true"
                 >新增</el-button
@@ -17,11 +16,10 @@
               <el-button
                 type="primary"
                 size="medium"
-                style="margin-bottom:5px"
                 icon="el-icon-arrow-left"
                 v-if="patherCode != '*'"
                 @click="go_back"
-                >返回上一级</el-button
+                >返回</el-button
               >
             </el-col>
 
@@ -56,7 +54,7 @@
       </el-header>
 
       <!-- 主内容容器 -->
-      <el-main>
+      <el-main style="padding: 10px 20px 20px 20px;">
         <!-- 新增顶层参数弹窗 -->
         <el-dialog
           :title="dialogTitle"

@@ -2,7 +2,7 @@
   <div class="">
     <el-container>
       <!-- 头部容器 -->
-      <el-header style="margin-top:20px">
+      <el-header style="">
         <el-card>
           <FilterTable
             ref="filter"

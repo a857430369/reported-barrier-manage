@@ -3,7 +3,7 @@
     <div>
           <el-form
             :model="Select"
-            style="margin:-10px auto;height:36px;margin-left:40px;"
+            style="margin:-3px auto 10px 0;height:36px"
           >
           <el-row >
             <!--搜索功能模块 -->
@@ -87,7 +87,7 @@
       <el-table
         border
         :data="tableData"
-        style="width: 95%; margin: 0px auto;"
+        style="width: 100%; margin: 0px auto;"
         v-loading="loading"
       >
         <el-table-column label="序号" type="index" align="center" width="65px">
@@ -115,7 +115,7 @@
         </el-table-column>
         <!-- <el-table-column label="公告摘要" show-overflow-tooltip prop="noticeSummary" align="center" width='350px'>
         </el-table-column> -->
-        <el-table-column label="通知类型" prop="noticeType" align="center">
+        <el-table-column label="通知类型" prop="noticeType" align="center" width='100'>
           <template slot-scope="pstatus"
             ><el-tag
               :type="pstatus.row.noticeType == 'S' ? 'primary' : 'success'"
@@ -150,7 +150,7 @@
               type="primary"
               icon="el-icon-edit"
               >修改</el-button> -->
-              <el-button v-if="scope.row.noticeAppoint=='F'"
+              <el-button v-if="scope.row.noticeAppoint=='F' && scope.row.noticeType!='M'"
               size="mini"
               type="success"
               icon="el-icon-share"
@@ -295,6 +295,9 @@ export default {
             this.tableData[i].sum='全体'
             this.tableData[i].count='全体'
           }
+          if(this.tableData[i].noticeType=='M'){
+            this.tableData[i].count=''
+          }
         }
         this.pageRequest.totalSize = res.content.total
       })
@@ -319,6 +322,9 @@ export default {
           if(this.tableData[i].noticeAppoint=='A'){
             this.tableData[i].sum='全体'
             this.tableData[i].count='全体'
+          }
+          if(this.tableData[i].noticeType=='M'){
+            this.tableData[i].count=''
           }
         }
         this.pageRequest.totalSize = res.content.total

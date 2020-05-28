@@ -1,15 +1,14 @@
 <template>
-  <div class="classify custom_style">
+  <div class="custom_style">
     <el-container>
       <!-- 头部容器 -->
-      <el-header style="margin-top:20px">
+      <el-header>
         <el-card class="filter">
           <el-row>
             <el-col :span="18">
               <el-button
                 type="primary"
                 size="medium"
-                style="margin-bottom:5px"
                 icon="el-icon-plus"
                 @click="addClassifyDialog = true"
                 >新增</el-button
@@ -17,11 +16,10 @@
               <el-button
                 type="primary"
                 size="medium"
-                style="margin-bottom:5px"
                 icon="el-icon-arrow-left"
                 v-if="patherCode != 0"
                 @click="go_back"
-                >返回上一级</el-button
+                >返回</el-button
               >
             </el-col>
 
@@ -48,153 +46,7 @@
       </el-header>
 
       <!-- 主内容容器 -->
-      <el-main>
-        <!-- 新增顶层分类弹窗 -->
-        <el-dialog
-          :title="dialogTitle"
-          :visible.sync="addClassifyDialog"
-          width="30%"
-          center
-        >
-          <el-form
-            :model="addClassifyForm"
-            :rules="rules"
-            status-icon
-            label-width="120px"
-            ref="addClassifyForm"
-          >
-            <el-form-item label="分类名称" prop="classifyName">
-              <el-input
-                v-model.trim="addClassifyForm.classifyName"
-                placeholder="例如:分类三"
-                autocomplete="off"
-              ></el-input>
-            </el-form-item>
-            <el-form-item
-              label="通知时长"
-              v-if="patherCode != 0"
-              prop="classifyDuration"
-            >
-              <el-input
-                placeholder="例如:0不通知"
-                v-model="addClassifyForm.classifyDuration"
-                :min="0"
-                clearable
-              >
-                <template slot="append">分钟</template>
-              </el-input>
-            </el-form-item>
-            <el-form-item label="优先级" v-if="patherCode != 0">
-              <el-select
-                v-model="addClassifyForm.urgentGrade"
-                placeholder="请选择"
-              >
-                <el-option
-                  v-for="item in urgentGradeOption"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="描述" prop="classifyRemark">
-              <el-input
-                type="textarea"
-                maxlength="30"
-                show-word-limit
-                rows="5"
-                v-model.trim="addClassifyForm.classifyRemark"
-              ></el-input>
-            </el-form-item>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="addClassifyDialog = false">取 消</el-button>
-            <el-button type="primary" @click="saveClassify('addClassifyForm')">
-              确 定
-            </el-button>
-          </div>
-        </el-dialog>
-
-        <!-- 编辑顶层分类弹窗 -->
-        <el-dialog
-          :title="dialogTitle"
-          :visible.sync="editClassifyDialog"
-          width="30%"
-          center
-        >
-          <el-form
-            :model="editClassifyForm"
-            :rules="rules"
-            status-icon
-            label-width="120px"
-            ref="editClassifyForm"
-          >
-            <el-form-item label="分类名称" prop="classifyName">
-              <el-input
-                v-model.trim="editClassifyForm.classifyName"
-                placeholder="例如:分类三"
-              ></el-input>
-            </el-form-item>
-            <el-form-item
-              label="通知时长"
-              v-if="patherCode != 0"
-              prop="classifyDuration"
-            >
-              <el-input
-                placeholder="例如:0不通知"
-                v-model="editClassifyForm.classifyDuration"
-                :min="0"
-                clearable
-              >
-                <template slot="append">分钟</template>
-              </el-input>
-            </el-form-item>
-            <el-form-item label="优先级" v-if="patherCode != 0">
-              <el-select
-                v-model="editClassifyForm.urgentGrade"
-                placeholder="请选择"
-              >
-                <el-option
-                  v-for="item in urgentGradeOption"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="有效/无效">
-              <el-select
-                v-model="editClassifyForm.classifyStatus"
-                placeholder="请选择"
-              >
-                <el-option
-                  v-for="item in classifyStatusOption"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="描述" prop="classifyRemark">
-              <el-input
-                type="textarea"
-                maxlength="30"
-                show-word-limit
-                rows="5"
-                v-model.trim="editClassifyForm.classifyRemark"
-              ></el-input>
-            </el-form-item>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="editClassifyDialog = false">取 消</el-button>
-            <el-button type="primary" @click="editClassify('editClassifyForm')">
-              确 定
-            </el-button>
-          </div>
-        </el-dialog>
+      <el-main style="padding: 10px 20px 20px 20px;">
         <el-card>
           <!-- 分类表格数据 -->
           <el-table
@@ -399,6 +251,150 @@
         >
         <el-button type="primary" @click="closeDialog">确 定</el-button>
       </span>
+    </el-dialog>
+
+    <!-- 新增顶层分类弹窗 -->
+    <el-dialog
+      :title="dialogTitle"
+      :visible.sync="addClassifyDialog"
+      width="30%"
+      center
+    >
+      <el-form
+        :model="addClassifyForm"
+        :rules="rules"
+        status-icon
+        label-width="120px"
+        ref="addClassifyForm"
+      >
+        <el-form-item label="分类名称" prop="classifyName">
+          <el-input
+            v-model.trim="addClassifyForm.classifyName"
+            placeholder="例如:分类三"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="通知时长"
+          v-if="patherCode != 0"
+          prop="classifyDuration"
+        >
+          <el-input
+            placeholder="例如:0不通知"
+            v-model="addClassifyForm.classifyDuration"
+            :min="0"
+            clearable
+          >
+            <template slot="append">分钟</template>
+          </el-input>
+        </el-form-item>
+        <el-form-item label="优先级" v-if="patherCode != 0">
+          <el-select v-model="addClassifyForm.urgentGrade" placeholder="请选择">
+            <el-option
+              v-for="item in urgentGradeOption"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="描述" prop="classifyRemark">
+          <el-input
+            type="textarea"
+            maxlength="30"
+            show-word-limit
+            rows="5"
+            v-model.trim="addClassifyForm.classifyRemark"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addClassifyDialog = false">取 消</el-button>
+        <el-button type="primary" @click="saveClassify('addClassifyForm')">
+          确 定
+        </el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 编辑顶层分类弹窗 -->
+    <el-dialog
+      :title="dialogTitle"
+      :visible.sync="editClassifyDialog"
+      width="30%"
+      center
+    >
+      <el-form
+        :model="editClassifyForm"
+        :rules="rules"
+        status-icon
+        label-width="120px"
+        ref="editClassifyForm"
+      >
+        <el-form-item label="分类名称" prop="classifyName">
+          <el-input
+            v-model.trim="editClassifyForm.classifyName"
+            placeholder="例如:分类三"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="通知时长"
+          v-if="patherCode != 0"
+          prop="classifyDuration"
+        >
+          <el-input
+            placeholder="例如:0不通知"
+            v-model="editClassifyForm.classifyDuration"
+            :min="0"
+            clearable
+          >
+            <template slot="append">分钟</template>
+          </el-input>
+        </el-form-item>
+        <el-form-item label="优先级" v-if="patherCode != 0">
+          <el-select
+            v-model="editClassifyForm.urgentGrade"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in urgentGradeOption"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="有效/无效">
+          <el-select
+            v-model="editClassifyForm.classifyStatus"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in classifyStatusOption"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="描述" prop="classifyRemark">
+          <el-input
+            type="textarea"
+            maxlength="30"
+            show-word-limit
+            rows="5"
+            v-model.trim="editClassifyForm.classifyRemark"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="editClassifyDialog = false">取 消</el-button>
+        <el-button type="primary" @click="editClassify('editClassifyForm')">
+          确 定
+        </el-button>
+      </div>
     </el-dialog>
   </div>
 </template>
